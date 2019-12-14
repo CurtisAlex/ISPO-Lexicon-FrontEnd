@@ -1,0 +1,59 @@
+<div class="content">
+  <div class="search-div">
+    <!-- <div class="search-display"> -->
+    <form class="basic-search-form">
+      <mat-form-field class="user-input">
+        <!-- <mat-icon matSuffix></mat-icon> -->
+        <input matInput placeholder="Search" />
+      </mat-form-field>
+    </form>
+    <div class="toggles" *ngIf="tabletSizeAndAbove">
+      <mat-slide-toggle labelPosition="before"
+        >ISO Standard Only</mat-slide-toggle
+      >
+      <mat-slide-toggle
+        labelPosition="before"
+        [checked]="translateOn"
+        (change)="toggleTranslate($event)"
+        >Translate</mat-slide-toggle
+      >
+    </div>
+    <!-- <div *ngIf="advancedSearchOn"> -->
+
+    <!-- </div> -->
+    <div
+      [class.search-buttons]="advancedSearchClosedAnimationComplete"
+      [class.advancedSearchSettings]="advancedSearchOpen()"
+    >
+      <button
+        mat-button
+        class="link-button"
+        (click)="toggleAdvancedSearch()"
+        [class.advancedSearch]="advancedSearchOpen()"
+      >
+        Advanced Search
+      </button>
+      <app-advanced-search-menu
+        [isOpen]="advancedSearchOn"
+        (closed)="advancedSearchClosed($event)"
+      ></app-advanced-search-menu>
+      <button mat-raised-button [class.search]="advancedSearchOpen()">
+        Search
+      </button>
+    </div>
+    <!-- </div> -->
+  </div>
+
+  <div class="language-selectors">
+    <app-language-bar></app-language-bar>
+  </div>
+
+  <div class="search-results">
+    <app-search-result-row
+      *ngFor="let row of searchResults; index as i"
+      [row]="row"
+      [searchResultNumber]="i"
+      [totalResultsNumber]="searchResults.length"
+    ></app-search-result-row>
+  </div>
+</div>

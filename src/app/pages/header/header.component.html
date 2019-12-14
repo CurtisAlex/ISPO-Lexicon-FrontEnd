@@ -1,0 +1,123 @@
+<div class="banner">
+  <div class="title-bar">
+    <!-- <img
+      src="https://wolper.com.au/wp-content/uploads/2017/10/image-placeholder.jpg"
+      alt="Image Placeholder"
+      class="icon"
+    />
+    <div class="title-text-bar">
+      <p class="title">International Society for Prosthetics and Orthotics</p>
+      <p class="sub-title">...moving beyond physical disability</p>
+    </div> -->
+    <img
+      src="https://cdn.ymaws.com/www.ispoint.org/graphics/logo.png"
+      alt="Title Image"
+      class="title-image"
+    />
+  </div>
+  <div *ngIf="tabletSizeAndAbove; else mobileViewMenu">
+    <div class="nav-btns-bar">
+      <button mat-button class="nav-btn" (click)="navigateToHome()">
+        Home
+      </button>
+      <button
+        mat-button
+        class="nav-btn lexicon-btn"
+        (click)="navigateToLexicon()"
+        [class.background]="1 === buttonSelected"
+      >
+        Lexicon
+      </button>
+      <button
+        mat-button
+        class="nav-btn acknowledgement-btn"
+        (click)="navigateToAcknowledgement()"
+        [class.background]="2 === buttonSelected"
+      >
+        Acknowledgement
+      </button>
+      <button
+        mat-button
+        [matMenuTriggerFor]="pageLanguageSelector"
+        class="nav-btn"
+      >
+        {{ currentLang }}
+      </button>
+      <mat-menu
+        #pageLanguageSelector="matMenu"
+        yPosition="below"
+        xPosition="before"
+      >
+        <button mat-menu-item (click)="changeWebsiteLanguage('En')">
+          English
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Fr')">
+          French
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Es')">
+          Spanish
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('De')">
+          German
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Vi')">
+          Vietnamese
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Zh')">
+          Chinese
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Tr')">
+          Turkish
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Ja')">
+          Japanse
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <ng-template #mobileViewMenu>
+    <div class="nav-btns-bar-mobile">
+      <button mat-button [matMenuTriggerFor]="mainMenu" class="main-menu-btn">
+        MENU
+        <!-- <mat-icon></mat-icon> get hamburger menu in white icon -->
+      </button>
+      <mat-menu #mainMenu="matMenu">
+        <button mat-menu-item (click)="navigateToHome()">Home</button>
+        <button mat-menu-item (click)="navigateToLexicon()">Lexicon</button>
+        <button mat-menu-item (click)="navigateToAcknowledgement()">
+          Acknowledgement
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="pageLanguageSelector">
+          {{ currentLang }}
+        </button>
+      </mat-menu>
+
+      <mat-menu #pageLanguageSelector="matMenu">
+        <button mat-menu-item (click)="changeWebsiteLanguage('En')">
+          English
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Fr')">
+          French
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Es')">
+          Spanish
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('De')">
+          German
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Vi')">
+          Vietnamese
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Zh')">
+          Chinese
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Tr')">
+          Turkish
+        </button>
+        <button mat-menu-item (click)="changeWebsiteLanguage('Ja')">
+          Japanse
+        </button>
+      </mat-menu>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,24 @@
+<div class="language-bar">
+  <nav mat-tab-nav-bar class="first-language" [class.full-width]="!translateOn">
+    <a
+      mat-tab-link
+      *ngFor="let language of languages"
+      (click)="firstLanguageClicked(language)"
+      [disabled]="firstLanguageTabDisabled(language)"
+      [active]="activeLanguage == language"
+    >
+      {{ language }}
+    </a>
+  </nav>
+  <nav mat-tab-nav-bar *ngIf="translateOn" class="translated-language">
+    <a
+      mat-tab-link
+      *ngFor="let language of languages"
+      (click)="translatedLanguageClicked(language)"
+      [disabled]="activeLanguage == language"
+      [active]="activeTranslatedLanguage == language"
+    >
+      {{ language }}
+    </a>
+  </nav>
+</div>

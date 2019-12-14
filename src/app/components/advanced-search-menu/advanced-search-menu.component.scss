@@ -1,0 +1,17 @@
+.open-close-container {
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+.toggles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

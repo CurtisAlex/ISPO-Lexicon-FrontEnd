@@ -1,0 +1,50 @@
+<div
+  [@openClose]="isOpen ? 'open' : 'closed'"
+  class="open-close-container"
+  (@openClose.done)="onAnimationEventDone($event)"
+>
+  <div class="options" *ngIf="optionVisibility || isOpen">
+    <div class="toggles" *ngIf="!tabletSizeAndAbove">
+      <mat-slide-toggle labelPosition="before"
+        >ISO Standard Only</mat-slide-toggle
+      >
+      <mat-slide-toggle
+        labelPosition="before"
+        [checked]="translateOn"
+        (change)="toggleTranslate($event)"
+        >Translate</mat-slide-toggle
+      >
+    </div>
+
+    <mat-form-field>
+      <mat-label>Search Criteria:</mat-label>
+      <mat-select
+        [formControl]="criteriaControl"
+        (selectionChange)="criteriaSelected($event)"
+        required
+      >
+        <mat-option *ngFor="let criterion of criteria" [value]="criterion">
+          {{ criterion }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="criteriaControl.hasError('required')"
+        >Please choose a search criteria</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Search Target:</mat-label>
+      <mat-select
+        [formControl]="targetControl"
+        (selectionChange)="targetSelected($event)"
+        required
+      >
+        <mat-option *ngFor="let target of targets" [value]="target">
+          {{ target }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="targetControl.hasError('required')"
+        >Please choose a search target</mat-error
+      >
+    </mat-form-field>
+  </div>
+</div>

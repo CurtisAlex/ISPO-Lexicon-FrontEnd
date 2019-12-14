@@ -1,0 +1,47 @@
+.language-bar {
+  display: flex;
+  // Tablet and smaller
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  // Tablet and bigger
+  @media (min-width: 769px) {
+    width: 100%;
+    flex-direction: row;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 25px;
+  }
+}
+
+// May combine first-language and second-language into there own classifier
+// Depending on how the dictory option will be handed (only show one language)
+.first-language {
+  @media (min-width: 769px) {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 25px;
+    margin-top: 0.5rem;
+  }
+}
+
+.translated-language {
+  @media (min-width: 769px) {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 25px;
+    margin-top: 0.5rem;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
