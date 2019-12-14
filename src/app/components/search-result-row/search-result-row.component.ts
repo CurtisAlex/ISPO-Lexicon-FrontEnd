@@ -14,7 +14,7 @@ export class SearchResultRowComponent implements OnInit, DoCheck {
     private searchService: SearchService
   ) {}
 
-  @Input() row: SearchResultRow[];
+  @Input() row: SearchResultRow;
   @Input() searchResultNumber: number;
   // Most likely going to remove
   @Input() totalResultsNumber: number;
