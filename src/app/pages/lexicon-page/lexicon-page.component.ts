@@ -3,6 +3,7 @@ import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { SearchResultRow } from "src/app/models/searchResultRow";
 import { SearchService } from "src/app/services/search-service/search.service";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
+import { MatInput } from "@angular/material/input";
 
 @Component({
   selector: "app-lexicon-page",
@@ -16,7 +17,9 @@ export class LexiconPageComponent implements OnInit {
   ) {}
   tabletSizeAndAbove = true;
   translateOn: boolean;
+  isoStandardOnlyOn: boolean;
 
+  searchInput: string = "";
   searchResults: SearchResultRow[];
 
   advancedSearchClosedAnimationComplete = true;
@@ -33,10 +36,18 @@ export class LexiconPageComponent implements OnInit {
           this.tabletSizeAndAbove = true;
           // Translate toggle not in advanced search when in computer view
           this.translateOn = this.searchService.translate;
+          this.isoStandardOnlyOn = this.searchService.isoStandardOnly;
         }
       });
 
     this.getTable();
+  }
+
+  search(): void {
+    this.searchService.searchInput = this.searchInput;
+    console.log("***Search Button Clicked***");
+    this.searchService.dummySearch();
+    console.log("***************************");
   }
 
   getTable(): void {
@@ -48,6 +59,11 @@ export class LexiconPageComponent implements OnInit {
   toggleTranslate(matSlideToggleChange: MatSlideToggleChange) {
     this.translateOn = matSlideToggleChange.checked.valueOf();
     this.searchService.translate = this.translateOn;
+  }
+
+  toggleIsoStandardOnly(matSlideToggleChange: MatSlideToggleChange) {
+    this.isoStandardOnlyOn = matSlideToggleChange.checked.valueOf();
+    this.searchService.isoStandardOnly = this.isoStandardOnlyOn;
   }
 
   toggleAdvancedSearch() {

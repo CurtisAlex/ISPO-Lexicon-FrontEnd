@@ -35,9 +35,22 @@
 
 .panel-title-text {
   font-weight: bold;
+
+  &-second-language {
+    font-weight: bold;
+    justify-content: flex-end;
+    text-align: right;
+  }
 }
 
 .panel-second-language-word {
   padding-top: 0.5rem;
   font-weight: bold;
+}
+
+.iso-standard-icon {
+  height: 18px;
+  width: 18px;
+  margin-right: 16px;
+  align-self: center;
 }

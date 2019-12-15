@@ -10,15 +10,16 @@ import { Language, SearchCriteria, SearchTarget } from "src/app/models/enums";
 export class SearchService {
   constructor() {}
 
-  private knownLangVal: Language;
-  private unknownLangVal: Language;
+  private firstLangVal: Language = Language.English; // Default English
+  private secondLangVal: Language = Language.French; // Default French
 
-  private translateOn: boolean = true;
+  private translateOn: boolean = true; // Default true
+  private isoStandardOnlyOn: boolean = false; // Default false
 
-  private isoStandardOnlyOn: boolean;
+  private criteria: SearchCriteria = SearchCriteria.BeginsWith; // Default BeginsWith
+  private target: SearchTarget = SearchTarget.FLWord; // Default First Column Word
 
-  private criteria: SearchCriteria;
-  private target: SearchTarget;
+  private input: string = ""; // Default empty string
 
   // Setup for the future http.get call that will return an observable
   // For now it is just returning mock data
@@ -26,21 +27,49 @@ export class SearchService {
     return of(ROWS);
   }
 
+  dummySearch() {
+    // If translate on use the following search values in the backend call
+    if (this.translateOn) {
+      console.log("Search Text Input: " + this.input);
+      console.log("First Langauge Selected: " + this.firstLangVal);
+      console.log("Second Langauge Selected: " + this.secondLangVal);
+      console.log("Translate: " + this.translateOn);
+      console.log("ISO Standard Only: " + this.isoStandardOnlyOn);
+      console.log("Criteria Selected: " + this.criteria);
+      console.log("Target Selected: " + this.target);
+    } else {
+      // If translate off then use the following search values in the backend call
+      console.log("Search Text Input: " + this.input);
+      console.log("First Langauge Selected: " + this.firstLangVal);
+      console.log("Translate: " + this.translateOn);
+      console.log("ISO Standard Only: " + this.isoStandardOnlyOn);
+      console.log("Criteria Selected: " + this.criteria);
+      if (
+        this.target === SearchTarget.SLDefinition ||
+        this.target === SearchTarget.SLWord
+      ) {
+        console.log("Target Selected: " + SearchTarget.FLWord); // If the target is the second lang column, use the default value
+      } else {
+        console.log("Target Selected: " + this.target);
+      }
+    }
+  }
+
   // Maybe do this a different way
-  get knownLang() {
-    return this.knownLangVal;
+  get firstLang() {
+    return this.firstLangVal;
   }
 
-  set knownLang(lang: Language) {
-    this.knownLangVal = lang;
+  set firstLang(lang: Language) {
+    this.firstLangVal = lang;
   }
 
-  get unknownLang() {
-    return this.unknownLangVal;
+  get secondLang() {
+    return this.secondLangVal;
   }
 
-  set unknownLang(lang: Language) {
-    this.unknownLangVal = lang;
+  set secondLang(lang: Language) {
+    this.secondLangVal = lang;
   }
 
   get translate() {
@@ -87,5 +116,13 @@ export class SearchService {
     } else {
       return [SearchTarget.FLWord, SearchTarget.FLDefinition];
     }
+  }
+
+  get searchInput() {
+    return this.input;
+  }
+
+  set searchInput(searchInput: string) {
+    this.input = searchInput;
   }
 }

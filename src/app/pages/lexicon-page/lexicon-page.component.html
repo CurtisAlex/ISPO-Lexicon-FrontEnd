@@ -1,14 +1,24 @@
 <div class="content">
   <div class="search-div">
     <!-- <div class="search-display"> -->
-    <form class="basic-search-form">
+    <!-- <form class="basic-search-form"> -->
+    <div class="basic-search-form">
       <mat-form-field class="user-input">
         <!-- <mat-icon matSuffix></mat-icon> -->
-        <input matInput placeholder="Search" />
+        <input
+          matInput
+          placeholder="Search"
+          [value]="searchInput"
+          (input)="searchInput = $event.target.value"
+        />
       </mat-form-field>
-    </form>
+    </div>
+    <!-- </form> -->
     <div class="toggles" *ngIf="tabletSizeAndAbove">
-      <mat-slide-toggle labelPosition="before"
+      <mat-slide-toggle
+        labelPosition="before"
+        [checked]="isoStandardOnlyOn"
+        (change)="toggleIsoStandardOnly($event)"
         >ISO Standard Only</mat-slide-toggle
       >
       <mat-slide-toggle
@@ -37,7 +47,11 @@
         [isOpen]="advancedSearchOn"
         (closed)="advancedSearchClosed($event)"
       ></app-advanced-search-menu>
-      <button mat-raised-button [class.search]="advancedSearchOpen()">
+      <button
+        mat-raised-button
+        [class.search]="advancedSearchOpen()"
+        (click)="search()"
+      >
         Search
       </button>
     </div>

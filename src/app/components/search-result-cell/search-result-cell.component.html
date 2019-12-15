@@ -1,4 +1,12 @@
 <div class="search-cell">
-  <p class="languageWord">{{ word }}</p>
+  <div class="title">
+    <p class="languageWord">{{ word }}</p>
+    <img
+      *ngIf="isoStandard"
+      src="https://cdn.iso.org/resources/wood/3.0.8/img/iso/iso-logo-print.gif"
+      alt="ISO Standard"
+      class="iso-standard-icon"
+    />
+  </div>
   <p class="wordDescription">{{ description }}</p>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, DoCheck } from "@angular/core";
 import { SearchService } from "src/app/services/search-service/search.service";
+import { Language } from "src/app/models/enums";
 
 @Component({
   selector: "app-language-bar",
@@ -9,16 +10,16 @@ import { SearchService } from "src/app/services/search-service/search.service";
 export class LanguageBarComponent implements OnInit, DoCheck {
   constructor(private searchService: SearchService) {}
   translateOn: boolean;
-  // TODO:: Make this language list a global list
-  languages = [
-    "English",
-    "French",
-    "Spanish",
-    "German",
-    "Vietnamese",
-    "Chinese",
-    "Turkish",
-    "Japanese"
+
+  languages: Language[] = [
+    Language.English,
+    Language.French,
+    Language.Spanish,
+    Language.German,
+    Language.Vietnamese,
+    Language.Chinese,
+    Language.Turkish,
+    Language.Japanse
   ];
   activeLanguage = this.languages[0];
 
@@ -46,13 +47,11 @@ export class LanguageBarComponent implements OnInit, DoCheck {
 
   firstLanguageClicked(language) {
     this.activeLanguage = language;
-    console.log("First Language Currently Selected: " + this.activeLanguage);
+    this.searchService.firstLang = this.activeLanguage;
   }
 
   translatedLanguageClicked(language) {
     this.activeTranslatedLanguage = language;
-    console.log(
-      "Translated Language Currently Selected: " + this.activeTranslatedLanguage
-    );
+    this.searchService.secondLang = this.activeTranslatedLanguage;
   }
 }

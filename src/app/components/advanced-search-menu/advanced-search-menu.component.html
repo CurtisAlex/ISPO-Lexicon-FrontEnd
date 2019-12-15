@@ -5,7 +5,10 @@
 >
   <div class="options" *ngIf="optionVisibility || isOpen">
     <div class="toggles" *ngIf="!tabletSizeAndAbove">
-      <mat-slide-toggle labelPosition="before"
+      <mat-slide-toggle
+        labelPosition="before"
+        [checked]="isoStandardOnlyOn"
+        (change)="toggleIsoStandardOnly($event)"
         >ISO Standard Only</mat-slide-toggle
       >
       <mat-slide-toggle
@@ -21,30 +24,22 @@
       <mat-select
         [formControl]="criteriaControl"
         (selectionChange)="criteriaSelected($event)"
-        required
       >
         <mat-option *ngFor="let criterion of criteria" [value]="criterion">
           {{ criterion }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="criteriaControl.hasError('required')"
-        >Please choose a search criteria</mat-error
-      >
     </mat-form-field>
     <mat-form-field>
       <mat-label>Search Target:</mat-label>
       <mat-select
         [formControl]="targetControl"
         (selectionChange)="targetSelected($event)"
-        required
       >
         <mat-option *ngFor="let target of targets" [value]="target">
           {{ target }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="targetControl.hasError('required')"
-        >Please choose a search target</mat-error
-      >
     </mat-form-field>
   </div>
 </div>

@@ -4,4 +4,5 @@ export class SearchResultRow {
   unknownLangWord: string;
   knownLangDescription: string;
   unknownLangDescription: string;
+  isoStandard: boolean;
 }

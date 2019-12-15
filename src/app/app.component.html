@@ -1,21 +1,22 @@
-<div class="background">
-  <div class="nav-bar">
-    <app-header (buttonClicked)="onButtonClick($event)"></app-header>
+<div class="nav-bar">
+  <app-header (buttonClicked)="onButtonClick($event)"></app-header>
+</div>
+
+<div *ngIf="lexiconPageSelected; else ackPage">
+  <!-- <mat-toolbar class="title-bar"><p class="title">LEXICON</p></mat-toolbar> -->
+
+  <div class="main-page-contents">
+    <app-lexicon-page></app-lexicon-page>
   </div>
+</div>
 
-  <div *ngIf="lexiconPageSelected; else ackPage">
-    <!-- <mat-toolbar class="title-bar"><p class="title">LEXICON</p></mat-toolbar> -->
-
-    <div class="main-page-contents">
-      <app-lexicon-page></app-lexicon-page>
-    </div>
-  </div>
-
-  <ng-template #ackPage>
-    <!-- <mat-toolbar class="title-bar"
+<ng-template #ackPage>
+  <!-- <mat-toolbar class="title-bar"
       ><p class="title">ACKNOWLEDGEMENT</p></mat-toolbar
     > -->
-
+  <div class="main-page-contents">
     <app-acknowledgement-page></app-acknowledgement-page>
-  </ng-template>
-</div>
+  </div>
+</ng-template>
+<!-- Footer -->
+<app-footer></app-footer>

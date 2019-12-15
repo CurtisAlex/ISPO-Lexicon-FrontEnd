@@ -63,11 +63,12 @@ export class AdvancedSearchMenuComponent implements OnInit, DoCheck {
   criteriaControl = new FormControl("", [Validators.required]);
   targetControl = new FormControl("", [Validators.required]);
 
-  criteria: string[] = ["Begins with", "Engs with", "Contains", "Equals"];
+  criteria: string[] = ["Begins with", "Ends with", "Contains", "Equals"];
 
   targets: string[];
 
   translateOn: boolean;
+  isoStandardOnlyOn: boolean;
 
   ngOnInit() {
     this.getTargetValue();
@@ -80,6 +81,7 @@ export class AdvancedSearchMenuComponent implements OnInit, DoCheck {
           this.tabletSizeAndAbove = false;
           // Translate toggle only in advanced search when in tablet view and smaller
           this.translateOn = this.searchService.translate;
+          this.isoStandardOnlyOn = this.searchService.isoStandardOnly;
         } else {
           this.tabletSizeAndAbove = true;
         }
@@ -97,6 +99,11 @@ export class AdvancedSearchMenuComponent implements OnInit, DoCheck {
   toggleTranslate(matSlideToggleChange: MatSlideToggleChange) {
     this.translateOn = matSlideToggleChange.checked.valueOf();
     this.searchService.translate = this.translateOn;
+  }
+
+  toggleIsoStandardOnly(matSlideToggleChange: MatSlideToggleChange) {
+    this.isoStandardOnlyOn = matSlideToggleChange.checked.valueOf();
+    this.searchService.isoStandardOnly = this.isoStandardOnlyOn;
   }
 
   // Set value of the criteria selected

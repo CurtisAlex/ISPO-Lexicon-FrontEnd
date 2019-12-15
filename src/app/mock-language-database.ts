@@ -100,14 +100,16 @@ export const ROWS: SearchResultRow[] = [
     knownLangWord: "abdomen",
     unknownLangWord: "Bauch, der",
     knownLangDescription: "area of the body between thorax and plevis",
-    unknownLangDescription: "Körperregion zwischen Brustkorb und Becken"
+    unknownLangDescription: "Körperregion zwischen Brustkorb und Becken",
+    isoStandard: false
   },
   {
     id: 2,
     knownLangWord: "abdominal",
     unknownLangWord: "abdominal",
     knownLangDescription: "pertaining to the abdomen",
-    unknownLangDescription: "in Bezug zum Abdomen (Bauch)"
+    unknownLangDescription: "in Bezug zum Abdomen (Bauch)",
+    isoStandard: true
   },
   {
     id: 3,
@@ -115,14 +117,16 @@ export const ROWS: SearchResultRow[] = [
     unknownLangWord: "abspreizen, abduzieren",
     knownLangDescription:
       "movement of a body part away from the midline of the body",
-    unknownLangDescription: "(ein Glied) von der Körpermittellinie weg bewegen"
+    unknownLangDescription: "(ein Glied) von der Körpermittellinie weg bewegen",
+    isoStandard: true
   },
   {
     id: 4,
     knownLangWord: "abducted gait",
     unknownLangWord: "abduzierter Gang, der",
     knownLangDescription: "walking with the legs spread away from the midline",
-    unknownLangDescription: "abgespreiztes Gehen"
+    unknownLangDescription: "abgespreiztes Gehen",
+    isoStandard: false
   },
   {
     id: 5,
@@ -130,6 +134,7 @@ export const ROWS: SearchResultRow[] = [
     unknownLangWord: "Abduktor, der",
     knownLangDescription:
       "muscle that moves a body part away from the midline of the body",
-    unknownLangDescription: "abduzierender Muskel"
+    unknownLangDescription: "abduzierender Muskel",
+    isoStandard: false
   }
 ];

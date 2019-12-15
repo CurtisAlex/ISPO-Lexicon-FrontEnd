@@ -1,6 +1,5 @@
 .search-cell {
   width: 100%;
-  //flex-grow: 1;
 }
 
 .languageWord {
@@ -13,4 +12,15 @@
 .wordDescription {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.iso-standard-icon {
+  height: 18px;
+  width: 18px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

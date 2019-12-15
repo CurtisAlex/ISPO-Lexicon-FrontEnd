@@ -1,17 +1,8 @@
 <div class="banner">
   <div class="title-bar">
-    <!-- <img
-      src="https://wolper.com.au/wp-content/uploads/2017/10/image-placeholder.jpg"
-      alt="Image Placeholder"
-      class="icon"
-    />
-    <div class="title-text-bar">
-      <p class="title">International Society for Prosthetics and Orthotics</p>
-      <p class="sub-title">...moving beyond physical disability</p>
-    </div> -->
     <img
       src="https://cdn.ymaws.com/www.ispoint.org/graphics/logo.png"
-      alt="Title Image"
+      alt="ISPO Title Image"
       class="title-image"
     />
   </div>
@@ -36,7 +27,8 @@
       >
         Acknowledgement
       </button>
-      <button
+      <!-- Uncomment below code to add a website language menu selector -->
+      <!-- <button
         mat-button
         [matMenuTriggerFor]="pageLanguageSelector"
         class="nav-btn"
@@ -72,7 +64,7 @@
         <button mat-menu-item (click)="changeWebsiteLanguage('Ja')">
           Japanse
         </button>
-      </mat-menu>
+      </mat-menu> -->
     </div>
   </div>
   <ng-template #mobileViewMenu>
@@ -87,12 +79,14 @@
         <button mat-menu-item (click)="navigateToAcknowledgement()">
           Acknowledgement
         </button>
-        <button mat-menu-item [matMenuTriggerFor]="pageLanguageSelector">
+        <!-- Uncomment below code to add a website language menu selector -->
+        <!-- <button mat-menu-item [matMenuTriggerFor]="pageLanguageSelector">
           {{ currentLang }}
-        </button>
+        </button> -->
       </mat-menu>
 
-      <mat-menu #pageLanguageSelector="matMenu">
+      <!-- Uncomment below code to add a website language menu selector -->
+      <!-- <mat-menu #pageLanguageSelector="matMenu">
         <button mat-menu-item (click)="changeWebsiteLanguage('En')">
           English
         </button>
@@ -117,7 +111,7 @@
         <button mat-menu-item (click)="changeWebsiteLanguage('Ja')">
           Japanse
         </button>
-      </mat-menu>
+      </mat-menu> -->
     </div>
   </ng-template>
 </div>

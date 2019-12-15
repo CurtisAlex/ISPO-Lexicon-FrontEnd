@@ -10,12 +10,14 @@
       [class.first-col]="translateOn"
       [word]="row.knownLangWord"
       [description]="row.knownLangDescription"
+      [isoStandard]="row.isoStandard"
     ></app-search-result-cell>
     <app-search-result-cell
       *ngIf="translateOn"
       class="cell"
       [word]="row.unknownLangWord"
       [description]="row.unknownLangDescription"
+      [isoStandard]="row.isoStandard"
     ></app-search-result-cell>
   </div>
 </div>
@@ -33,9 +35,15 @@
         <mat-panel-title class="panel-title-text">
           {{ row.knownLangWord }}
         </mat-panel-title>
+        <img
+          *ngIf="row.isoStandard"
+          src="https://cdn.iso.org/resources/wood/3.0.8/img/iso/iso-logo-print.gif"
+          alt="ISO Standard"
+          class="iso-standard-icon"
+        />
         <mat-panel-title
           *ngIf="!panelOpenState && translateOn"
-          class="panel-title-text"
+          class="panel-title-text-second-language"
         >
           {{ row.unknownLangWord }}
         </mat-panel-title>

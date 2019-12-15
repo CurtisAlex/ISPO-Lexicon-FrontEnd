@@ -13,13 +13,15 @@ import { LanguageBarComponent } from "./language-bar/language-bar.component";
 import { SearchResultRowComponent } from "./search-result-row/search-result-row.component";
 import { SearchResultCellComponent } from "./search-result-cell/search-result-cell.component";
 import { AdvancedSearchMenuComponent } from "./advanced-search-menu/advanced-search-menu.component";
+import { FooterComponent } from "./footer/footer.component";
 
 @NgModule({
   declarations: [
     LanguageBarComponent,
     SearchResultRowComponent,
     SearchResultCellComponent,
-    AdvancedSearchMenuComponent
+    AdvancedSearchMenuComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { AdvancedSearchMenuComponent } from "./advanced-search-menu/advanced-sea
     LanguageBarComponent,
     SearchResultRowComponent,
     SearchResultCellComponent,
-    AdvancedSearchMenuComponent
+    AdvancedSearchMenuComponent,
+    FooterComponent
   ]
 })
 export class ComponentModule {}
