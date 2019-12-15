@@ -557,6 +557,7 @@ let AdvancedSearchMenuComponent = class AdvancedSearchMenuComponent {
     toggleIsoStandardOnly(matSlideToggleChange) {
         this.isoStandardOnlyOn = matSlideToggleChange.checked.valueOf();
         this.searchService.isoStandardOnly = this.isoStandardOnlyOn;
+        this.searchService.dummySearch(); // Make new query call with the updated value of ISO Standard Only toggle
     }
     // Set value of the criteria selected
     criteriaSelected(event) {
@@ -1464,6 +1465,7 @@ let LexiconPageComponent = class LexiconPageComponent {
     toggleIsoStandardOnly(matSlideToggleChange) {
         this.isoStandardOnlyOn = matSlideToggleChange.checked.valueOf();
         this.searchService.isoStandardOnly = this.isoStandardOnlyOn;
+        this.searchService.dummySearch(); // Make new query call with the updated value of ISO Standard Only toggle
     }
     toggleAdvancedSearch() {
         this.advancedSearchOn = !this.advancedSearchOn;

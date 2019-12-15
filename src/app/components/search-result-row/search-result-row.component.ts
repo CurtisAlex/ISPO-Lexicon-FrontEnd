@@ -23,7 +23,9 @@ export class SearchResultRowComponent implements OnInit, DoCheck {
   lastResult = false;
   oddResult = false;
   tabletSizeAndAbove = true;
+
   translateOn: boolean;
+  isoStandardOnlyOn: boolean;
 
   panelOpenState = false;
 

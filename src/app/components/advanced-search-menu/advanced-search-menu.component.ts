@@ -104,6 +104,7 @@ export class AdvancedSearchMenuComponent implements OnInit, DoCheck {
   toggleIsoStandardOnly(matSlideToggleChange: MatSlideToggleChange) {
     this.isoStandardOnlyOn = matSlideToggleChange.checked.valueOf();
     this.searchService.isoStandardOnly = this.isoStandardOnlyOn;
+    this.searchService.dummySearch(); // Make new query call with the updated value of ISO Standard Only toggle
   }
 
   // Set value of the criteria selected

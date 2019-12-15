@@ -583,6 +583,7 @@
                 AdvancedSearchMenuComponent.prototype.toggleIsoStandardOnly = function (matSlideToggleChange) {
                     this.isoStandardOnlyOn = matSlideToggleChange.checked.valueOf();
                     this.searchService.isoStandardOnly = this.isoStandardOnlyOn;
+                    this.searchService.dummySearch(); // Make new query call with the updated value of ISO Standard Only toggle
                 };
                 // Set value of the criteria selected
                 AdvancedSearchMenuComponent.prototype.criteriaSelected = function (event) {
@@ -1415,6 +1416,7 @@
                 LexiconPageComponent.prototype.toggleIsoStandardOnly = function (matSlideToggleChange) {
                     this.isoStandardOnlyOn = matSlideToggleChange.checked.valueOf();
                     this.searchService.isoStandardOnly = this.isoStandardOnlyOn;
+                    this.searchService.dummySearch(); // Make new query call with the updated value of ISO Standard Only toggle
                 };
                 LexiconPageComponent.prototype.toggleAdvancedSearch = function () {
                     this.advancedSearchOn = !this.advancedSearchOn;

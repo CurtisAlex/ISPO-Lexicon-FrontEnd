@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, DoCheck } from "@angular/core";
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { SearchResultRow } from "src/app/models/searchResultRow";
 import { SearchService } from "src/app/services/search-service/search.service";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { MatInput } from "@angular/material/input";
+import { templateJitUrl } from "@angular/compiler";
 
 @Component({
   selector: "app-lexicon-page",
@@ -64,6 +65,7 @@ export class LexiconPageComponent implements OnInit {
   toggleIsoStandardOnly(matSlideToggleChange: MatSlideToggleChange) {
     this.isoStandardOnlyOn = matSlideToggleChange.checked.valueOf();
     this.searchService.isoStandardOnly = this.isoStandardOnlyOn;
+    this.searchService.dummySearch(); // Make new query call with the updated value of ISO Standard Only toggle
   }
 
   toggleAdvancedSearch() {
