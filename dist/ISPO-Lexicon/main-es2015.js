@@ -1420,8 +1420,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm2015/layout.js");
 /* harmony import */ var src_app_services_search_service_search_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/search-service/search.service */ "./src/app/services/search-service/search.service.ts");
-/* harmony import */ var src_app_services_api_service_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/api-service/api.service */ "./src/app/services/api-service/api.service.ts");
-
 
 
 
@@ -1430,10 +1428,10 @@ let LexiconPageComponent = class LexiconPageComponent {
     // tempTutorial: TempTutorial[];
     // error = "";
     // success = "";
-    constructor(breakpointObserver, searchService, api) {
+    constructor(breakpointObserver, searchService // private api: ApiService
+    ) {
         this.breakpointObserver = breakpointObserver;
         this.searchService = searchService;
-        this.api = api;
         this.tabletSizeAndAbove = true;
         this.searchInput = "";
         this.advancedSearchClosedAnimationComplete = true;
@@ -1459,7 +1457,7 @@ let LexiconPageComponent = class LexiconPageComponent {
         this.getSearchResults();
     }
     getSearchResults() {
-        this.api.getSearchResults().subscribe((results) => (this.tempDatabaseResults = results), (error) => (this.error = error));
+        this.searchService.getSearchResults().subscribe((results) => (this.tempDatabaseResults = results), (error) => (this.error = error));
     }
     // getTempTutorial(): void {
     //   this.searchService.getAll().subscribe(
@@ -1476,10 +1474,12 @@ let LexiconPageComponent = class LexiconPageComponent {
         console.log("***Search Button Clicked***");
         this.searchService.dummySearch();
         console.log("***************************");
-        this.tempDatabaseResults.forEach(element => {
-            console.log("DatabaseResult: " + element.lang_name.toString());
-            console.log("DatabaseResult: " + element.lang_code.toString());
-        });
+        // this.tempDatabaseResults.forEach(element => {
+        //   console.log("DatabaseResult: " + element.lang_name.toString());
+        //   console.log("DatabaseResult: " + element.lang_code.toString());
+        // });
+        // this.searchService.getSearchResults();
+        this.getSearchResults();
     }
     getTable() {
         this.searchService
@@ -1515,8 +1515,8 @@ let LexiconPageComponent = class LexiconPageComponent {
 };
 LexiconPageComponent.ctorParameters = () => [
     { type: _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_2__["BreakpointObserver"] },
-    { type: src_app_services_search_service_search_service__WEBPACK_IMPORTED_MODULE_3__["SearchService"] },
-    { type: src_app_services_api_service_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] }
+    { type: src_app_services_search_service_search_service__WEBPACK_IMPORTED_MODULE_3__["SearchService"] // private api: ApiService
+     }
 ];
 LexiconPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1601,44 +1601,6 @@ PagesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/services/api-service/api.service.ts":
-/*!*****************************************************!*\
-  !*** ./src/app/services/api-service/api.service.ts ***!
-  \*****************************************************/
-/*! exports provided: ApiService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiService", function() { return ApiService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-
-
-
-let ApiService = class ApiService {
-    constructor(http) {
-        this.http = http;
-        this.apiRoot = "http://lexicon-dev-env.us-west-2.elasticbeanstalk.com/"; //link to django instance (make it the link to the instance on aws)
-    }
-    getSearchResults() {
-        return this.http.get(this.apiRoot.concat("lexicon/"));
-    }
-};
-ApiService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
-ApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: "root"
-    })
-], ApiService);
-
-
-
-/***/ }),
-
 /***/ "./src/app/services/search-service/search.service.ts":
 /*!***********************************************************!*\
   !*** ./src/app/services/search-service/search.service.ts ***!
@@ -1651,9 +1613,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchService", function() { return SearchService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var src_app_mock_language_database__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/mock-language-database */ "./src/app/mock-language-database.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/models/enums */ "./src/app/models/enums.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var src_app_mock_language_database__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/mock-language-database */ "./src/app/mock-language-database.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/models/enums */ "./src/app/models/enums.ts");
+
 
 
 
@@ -1661,16 +1625,19 @@ __webpack_require__.r(__webpack_exports__);
 
 let SearchService = class SearchService {
     // constructor(private http: HttpClient) {}
-    constructor() {
+    constructor(http) {
+        this.http = http;
         // baseUrl =
         //   "http://ec2-44-229-252-18.us-west-2.compute.amazonaws.com/SamplePage.php";
         // tutorialResults: TempTutorial[];
-        this.firstLangVal = src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["Language"].English; // Default English
-        this.secondLangVal = src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["Language"].French; // Default French
+        this.apiRoot = "http://lexicon-dev-env.us-west-2.elasticbeanstalk.com/";
+        // private params: HttpParams;
+        this.firstLangVal = src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["Language"].English; // Default English
+        this.secondLangVal = src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["Language"].French; // Default French
         this.translateOn = true; // Default true
         this.isoStandardOnlyOn = false; // Default false
-        this.criteria = src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchCriteria"].BeginsWith; // Default BeginsWith
-        this.target = src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLWord; // Default First Column Word
+        this.criteria = src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchCriteria"].BeginsWith; // Default BeginsWith
+        this.target = src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].FLWord; // Default First Column Word
         this.input = ""; // Default empty string
     }
     // Maybe do this a different way
@@ -1729,10 +1696,117 @@ let SearchService = class SearchService {
     //   console.log(error);
     //   return throwError("Error! something went wrong");
     // }
+    // createGetParams() {
+    //   if (this.translateOn) {
+    //     // if translate is on then create params for the lexicon search
+    //     this.params = new HttpParams()
+    //       .set("FLVal", this.firstLangVal.toString())
+    //       .set("ISOStandard", this.isoStandardOnlyOn.toString())
+    //       .set("Criteria", this.criteria.toString())
+    //       .set("Target", this.target.toString())
+    //       .set("Input", this.input);
+    //   } else {
+    //     // else translate is off, then create params for the directonary search
+    //     this.params = new HttpParams()
+    //       .set("FLVal", this.firstLangVal.toString())
+    //       .set("SLVal", this.secondLangVal.toString())
+    //       .set("ISOStandard", this.isoStandardOnlyOn.toString())
+    //       .set("Criteria", this.criteria.toString())
+    //       .set("Target", this.target.toString())
+    //       .set("Input", this.input);
+    //   }
+    // }
+    convertLanguageToInt(lang) {
+        if (lang === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["Language"].English) {
+            return 0;
+        }
+        else if (lang === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["Language"].French) {
+            return 1;
+        }
+        else if (lang === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["Language"].Spanish) {
+            return 2;
+        }
+        else if (lang === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["Language"].German) {
+            return 3;
+        }
+        else if (lang === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["Language"].Vietnamese) {
+            return 4;
+        }
+        else if (lang === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["Language"].Chinese) {
+            return 5;
+        }
+        else if (lang === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["Language"].Turkish) {
+            return 6;
+        }
+        else if (lang === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["Language"].Japanse) {
+            return 7;
+        }
+    }
+    // Quick and dirty
+    convertFirstLanguageToInt() {
+        return this.convertLanguageToInt(this.firstLangVal);
+    }
+    // Quick and dirty
+    convertSecondLanguageToInt() {
+        return this.convertLanguageToInt(this.secondLangVal);
+    }
+    // Quick and dirty
+    convertSearchCriteriaToInt() {
+        if (this.criteria === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchCriteria"].BeginsWith) {
+            return 0;
+        }
+        else if (this.criteria === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchCriteria"].EndsWith) {
+            return 1;
+        }
+        else if (this.criteria === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchCriteria"].Contains) {
+            return 2;
+        }
+        else if (this.criteria === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchCriteria"].Equals) {
+            return 3;
+        }
+    }
+    // Quick and dirty
+    convertSearchTargetToInt() {
+        if (this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].FLWord) {
+            return 0;
+        }
+        else if (this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].FLDefinition) {
+            return 1;
+        }
+        else if (this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].SLWord) {
+            return 2;
+        }
+        else if (this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].SLDefinition) {
+            return 3;
+        }
+    }
+    getSearchResults() {
+        if (this.translateOn) {
+            // if translate is on then create params for the lexicon search
+            const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]()
+                .set("lang", this.convertFirstLanguageToInt().toString())
+                .set("lang_two", this.convertSecondLanguageToInt().toString()) // Dont know what param this will be
+                .set("iso_term", this.isoStandardOnlyOn.toString())
+                .set("Critcriteriaeria", this.convertSearchCriteriaToInt().toString())
+                .set("target", this.convertSearchTargetToInt().toString())
+                .set("sinput", this.input);
+            return this.http.get(this.apiRoot.concat("lexicon/"), { params });
+        }
+        else {
+            // else translate is off, then create params for the directonary search
+            const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]()
+                .set("lang", this.convertFirstLanguageToInt().toString())
+                .set("iso_term", this.isoStandardOnlyOn.toString())
+                .set("criteria", this.convertSearchCriteriaToInt().toString())
+                .set("target", this.convertSearchTargetToInt().toString())
+                .set("sinput", this.input);
+            return this.http.get(this.apiRoot.concat("directonary/"), { params });
+        }
+    }
     // Setup for the future http.get call that will return an observable
     // For now it is just returning mock data
     getResults() {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(src_app_mock_language_database__WEBPACK_IMPORTED_MODULE_2__["ROWS"]);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(src_app_mock_language_database__WEBPACK_IMPORTED_MODULE_3__["ROWS"]);
     }
     dummySearch() {
         // If translate on use the following search values in the backend call
@@ -1752,9 +1826,9 @@ let SearchService = class SearchService {
             console.log("Translate: " + this.translateOn);
             console.log("ISO Standard Only: " + this.isoStandardOnlyOn);
             console.log("Criteria Selected: " + this.criteria);
-            if (this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].SLDefinition ||
-                this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].SLWord) {
-                console.log("Target Selected: " + src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLWord); // If the target is the second lang column, use the default value
+            if (this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].SLDefinition ||
+                this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].SLWord) {
+                console.log("Target Selected: " + src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].FLWord); // If the target is the second lang column, use the default value
             }
             else {
                 console.log("Target Selected: " + this.target);
@@ -1765,17 +1839,20 @@ let SearchService = class SearchService {
     getSearchTargetValues() {
         if (this.translate) {
             return [
-                src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLWord,
-                src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLDefinition,
-                src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].SLWord,
-                src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].SLDefinition
+                src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].FLWord,
+                src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].FLDefinition,
+                src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].SLWord,
+                src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].SLDefinition
             ];
         }
         else {
-            return [src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLWord, src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLDefinition];
+            return [src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].FLWord, src_app_models_enums__WEBPACK_IMPORTED_MODULE_5__["SearchTarget"].FLDefinition];
         }
     }
 };
+SearchService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
 SearchService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: "root"
