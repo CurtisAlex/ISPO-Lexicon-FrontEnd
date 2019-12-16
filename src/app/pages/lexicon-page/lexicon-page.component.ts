@@ -28,7 +28,8 @@ export class LexiconPageComponent implements OnInit {
   isoStandardOnlyOn: boolean;
 
   searchInput: string = "";
-  searchResults: any[];
+  searchResults: SearchResultRow[];
+  tempDatabaseResults: any[];
   error: any;
 
   advancedSearchClosedAnimationComplete = true;
@@ -56,7 +57,7 @@ export class LexiconPageComponent implements OnInit {
 
   getSearchResults(): void {
     this.api.getSearchResults().subscribe(
-      (results: any[]) => (this.searchResults = results),
+      (results: any[]) => (this.tempDatabaseResults = results),
       (error: any) => (this.error = error)
     );
   }
@@ -77,10 +78,9 @@ export class LexiconPageComponent implements OnInit {
     console.log("***Search Button Clicked***");
     this.searchService.dummySearch();
     console.log("***************************");
-    this.searchResults.forEach(element => {
-      console.log("DatabaseResult: " + element);
-      console.log("DatabaseResult: " + element.toString());
+    this.tempDatabaseResults.forEach(element => {
       console.log("DatabaseResult: " + element.lang_name.toString());
+      console.log("DatabaseResult: " + element.lang_code.toString());
     });
   }
 
