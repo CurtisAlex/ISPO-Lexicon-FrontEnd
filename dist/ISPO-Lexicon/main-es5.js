@@ -1549,10 +1549,10 @@
             var ApiService = /** @class */ (function () {
                 function ApiService(http) {
                     this.http = http;
-                    this.apiRoot = "ec2-52-26-88-246.us-west-2.compute.amazonaws.com"; //link to django instance (make it the link to the instance on aws)
+                    this.apiRoot = "http://lexicon-dev-env.us-west-2.elasticbeanstalk.com/"; //link to django instance (make it the link to the instance on aws)
                 }
                 ApiService.prototype.getSearchResults = function () {
-                    return this.http.get(this.apiRoot.concat("lexicon"));
+                    return this.http.get(this.apiRoot.concat("lexicon/"));
                 };
                 return ApiService;
             }());

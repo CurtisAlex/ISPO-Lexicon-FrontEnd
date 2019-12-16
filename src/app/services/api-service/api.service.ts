@@ -5,11 +5,11 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root"
 })
 export class ApiService {
-  private apiRoot = "ec2-52-26-88-246.us-west-2.compute.amazonaws.com"; //link to django instance (make it the link to the instance on aws)
+  private apiRoot = "http://lexicon-dev-env.us-west-2.elasticbeanstalk.com/"; //link to django instance (make it the link to the instance on aws)
 
   constructor(private http: HttpClient) {}
 
   getSearchResults() {
-    return this.http.get(this.apiRoot.concat("lexicon"));
+    return this.http.get(this.apiRoot.concat("lexicon/"));
   }
 }
