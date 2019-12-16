@@ -5,6 +5,8 @@ import { SearchService } from "src/app/services/search-service/search.service";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { MatInput } from "@angular/material/input";
 import { templateJitUrl } from "@angular/compiler";
+import { TempTutorial } from "src/app/models/tempTutorial";
+import { ApiService } from "src/app/services/api-service/api.service";
 
 @Component({
   selector: "app-lexicon-page",
@@ -12,16 +14,22 @@ import { templateJitUrl } from "@angular/compiler";
   styleUrls: ["./lexicon-page.component.scss"]
 })
 export class LexiconPageComponent implements OnInit {
+  // tempTutorial: TempTutorial[];
+  // error = "";
+  // success = "";
+
   constructor(
     public breakpointObserver: BreakpointObserver,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private api: ApiService
   ) {}
   tabletSizeAndAbove = true;
   translateOn: boolean;
   isoStandardOnlyOn: boolean;
 
   searchInput: string = "";
-  searchResults: SearchResultRow[];
+  searchResults: any[];
+  error: any;
 
   advancedSearchClosedAnimationComplete = true;
   advancedSearchOn = false;
@@ -42,13 +50,38 @@ export class LexiconPageComponent implements OnInit {
       });
 
     this.getTable();
+    // this.getTempTutorial();
+    this.getSearchResults();
   }
+
+  getSearchResults(): void {
+    this.api.getSearchResults().subscribe(
+      (results: any[]) => (this.searchResults = results),
+      (error: any) => (this.error = error)
+    );
+  }
+
+  // getTempTutorial(): void {
+  //   this.searchService.getAll().subscribe(
+  //     (res: TempTutorial[]) => {
+  //       this.tempTutorial = res;
+  //     },
+  //     err => {
+  //       this.error = err;
+  //     }
+  //   );
+  // }
 
   search(): void {
     this.searchService.searchInput = this.searchInput;
     console.log("***Search Button Clicked***");
     this.searchService.dummySearch();
     console.log("***************************");
+    this.searchResults.forEach(element => {
+      console.log("DatabaseResult: " + element);
+      console.log("DatabaseResult: " + element.toString());
+      console.log("DatabaseResult: " + element.lang_name.toString());
+    });
   }
 
   getTable(): void {

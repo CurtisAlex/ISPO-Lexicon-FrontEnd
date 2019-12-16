@@ -136,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"content\">\r\n  <div class=\"search-div\">\r\n    <!-- <div class=\"search-display\"> -->\r\n    <!-- <form class=\"basic-search-form\"> -->\r\n    <div class=\"basic-search-form\">\r\n      <mat-form-field class=\"user-input\">\r\n        <!-- <mat-icon matSuffix></mat-icon> -->\r\n        <input\r\n          matInput\r\n          placeholder=\"Search\"\r\n          [value]=\"searchInput\"\r\n          (input)=\"searchInput = $event.target.value\"\r\n        />\r\n      </mat-form-field>\r\n    </div>\r\n    <!-- </form> -->\r\n    <div class=\"toggles\" *ngIf=\"tabletSizeAndAbove\">\r\n      <mat-slide-toggle\r\n        labelPosition=\"before\"\r\n        [checked]=\"isoStandardOnlyOn\"\r\n        (change)=\"toggleIsoStandardOnly($event)\"\r\n        >ISO Standard Only</mat-slide-toggle\r\n      >\r\n      <mat-slide-toggle\r\n        labelPosition=\"before\"\r\n        [checked]=\"translateOn\"\r\n        (change)=\"toggleTranslate($event)\"\r\n        >Translate</mat-slide-toggle\r\n      >\r\n    </div>\r\n    <!-- <div *ngIf=\"advancedSearchOn\"> -->\r\n\r\n    <!-- </div> -->\r\n    <div\r\n      [class.search-buttons]=\"advancedSearchClosedAnimationComplete\"\r\n      [class.advancedSearchSettings]=\"advancedSearchOpen()\"\r\n    >\r\n      <button\r\n        mat-button\r\n        class=\"link-button\"\r\n        (click)=\"toggleAdvancedSearch()\"\r\n        [class.advancedSearch]=\"advancedSearchOpen()\"\r\n      >\r\n        Advanced Search\r\n      </button>\r\n      <app-advanced-search-menu\r\n        [isOpen]=\"advancedSearchOn\"\r\n        (closed)=\"advancedSearchClosed($event)\"\r\n      ></app-advanced-search-menu>\r\n      <button\r\n        mat-raised-button\r\n        [class.search]=\"advancedSearchOpen()\"\r\n        (click)=\"search()\"\r\n      >\r\n        Search\r\n      </button>\r\n    </div>\r\n    <!-- </div> -->\r\n  </div>\r\n\r\n  <div class=\"language-selectors\">\r\n    <app-language-bar></app-language-bar>\r\n  </div>\r\n\r\n  <div class=\"search-results\">\r\n    <app-search-result-row\r\n      *ngFor=\"let row of searchResults; index as i\"\r\n      [row]=\"row\"\r\n      [searchResultNumber]=\"i\"\r\n      [totalResultsNumber]=\"searchResults.length\"\r\n    ></app-search-result-row>\r\n  </div>\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"content\">\r\n  <div class=\"search-div\">\r\n    <!-- <div class=\"search-display\"> -->\r\n    <!-- <form class=\"basic-search-form\"> -->\r\n    <div class=\"basic-search-form\">\r\n      <mat-form-field class=\"user-input\">\r\n        <!-- <mat-icon matSuffix></mat-icon> -->\r\n        <input\r\n          matInput\r\n          placeholder=\"Search\"\r\n          [value]=\"searchInput\"\r\n          (input)=\"searchInput = $event.target.value\"\r\n        />\r\n      </mat-form-field>\r\n    </div>\r\n    <!-- </form> -->\r\n    <div class=\"toggles\" *ngIf=\"tabletSizeAndAbove\">\r\n      <mat-slide-toggle\r\n        labelPosition=\"before\"\r\n        [checked]=\"isoStandardOnlyOn\"\r\n        (change)=\"toggleIsoStandardOnly($event)\"\r\n        >ISO Standard Only</mat-slide-toggle\r\n      >\r\n      <mat-slide-toggle\r\n        labelPosition=\"before\"\r\n        [checked]=\"translateOn\"\r\n        (change)=\"toggleTranslate($event)\"\r\n        >Translate</mat-slide-toggle\r\n      >\r\n    </div>\r\n    <!-- <div *ngIf=\"advancedSearchOn\"> -->\r\n\r\n    <!-- </div> -->\r\n    <div\r\n      [class.search-buttons]=\"advancedSearchClosedAnimationComplete\"\r\n      [class.advancedSearchSettings]=\"advancedSearchOpen()\"\r\n    >\r\n      <button\r\n        mat-button\r\n        class=\"link-button\"\r\n        (click)=\"toggleAdvancedSearch()\"\r\n        [class.advancedSearch]=\"advancedSearchOpen()\"\r\n      >\r\n        Advanced Search\r\n      </button>\r\n      <app-advanced-search-menu\r\n        [isOpen]=\"advancedSearchOn\"\r\n        (closed)=\"advancedSearchClosed($event)\"\r\n      ></app-advanced-search-menu>\r\n      <button\r\n        mat-raised-button\r\n        [class.search]=\"advancedSearchOpen()\"\r\n        (click)=\"search()\"\r\n      >\r\n        Search\r\n      </button>\r\n    </div>\r\n    <!-- </div> -->\r\n  </div>\r\n\r\n  <div class=\"language-selectors\">\r\n    <app-language-bar></app-language-bar>\r\n  </div>\r\n\r\n  <div class=\"search-results\">\r\n    <app-search-result-row\r\n      *ngFor=\"let row of searchResults; index as i\"\r\n      [row]=\"row\"\r\n      [searchResultNumber]=\"i\"\r\n      [totalResultsNumber]=\"searchResults.length\"\r\n    ></app-search-result-row>\r\n  </div>\r\n</div>\r\n\r\n<h2>Temp List</h2>\r\n<ul>\r\n  <li *ngFor=\"let item of searchResults\">\r\n    {{ item }}\r\n  </li>\r\n</ul>\r\n");
 
 /***/ }),
 
@@ -398,7 +398,7 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppComponent = class AppComponent {
     constructor() {
-        this.title = 'ISPO-Lexicon';
+        this.title = "ISPO-Lexicon";
         this.lexiconPageSelected = true;
     }
     onButtonClick(btnClicked) {
@@ -424,7 +424,7 @@ let AppComponent = class AppComponent {
 };
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-root',
+        selector: "app-root",
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")).default]
     })
@@ -447,11 +447,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm2015/layout.js");
-/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/toolbar */ "./node_modules/@angular/material/esm2015/toolbar.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/components.module */ "./src/app/components/components.module.ts");
-/* harmony import */ var _pages_pages_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/pages.module */ "./src/app/pages/pages.module.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm2015/layout.js");
+/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/toolbar */ "./node_modules/@angular/material/esm2015/toolbar.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/components.module */ "./src/app/components/components.module.ts");
+/* harmony import */ var _pages_pages_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/pages.module */ "./src/app/pages/pages.module.ts");
+
 
 
 
@@ -465,16 +467,17 @@ let AppModule = class AppModule {
 };
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-            _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_4__["MatToolbarModule"],
-            _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_3__["LayoutModule"],
-            _components_components_module__WEBPACK_IMPORTED_MODULE_6__["ComponentModule"],
-            _pages_pages_module__WEBPACK_IMPORTED_MODULE_7__["PagesModule"]
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
+            _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_5__["MatToolbarModule"],
+            _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_4__["LayoutModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_7__["ComponentModule"],
+            _pages_pages_module__WEBPACK_IMPORTED_MODULE_8__["PagesModule"]
         ],
         providers: [],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
     })
 ], AppModule);
 
@@ -1417,14 +1420,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm2015/layout.js");
 /* harmony import */ var src_app_services_search_service_search_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/search-service/search.service */ "./src/app/services/search-service/search.service.ts");
+/* harmony import */ var src_app_services_api_service_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/api-service/api.service */ "./src/app/services/api-service/api.service.ts");
+
 
 
 
 
 let LexiconPageComponent = class LexiconPageComponent {
-    constructor(breakpointObserver, searchService) {
+    // tempTutorial: TempTutorial[];
+    // error = "";
+    // success = "";
+    constructor(breakpointObserver, searchService, api) {
         this.breakpointObserver = breakpointObserver;
         this.searchService = searchService;
+        this.api = api;
         this.tabletSizeAndAbove = true;
         this.searchInput = "";
         this.advancedSearchClosedAnimationComplete = true;
@@ -1446,12 +1455,32 @@ let LexiconPageComponent = class LexiconPageComponent {
             }
         });
         this.getTable();
+        // this.getTempTutorial();
+        this.getSearchResults();
     }
+    getSearchResults() {
+        this.api.getSearchResults().subscribe((results) => (this.searchResults = results), (error) => (this.error = error));
+    }
+    // getTempTutorial(): void {
+    //   this.searchService.getAll().subscribe(
+    //     (res: TempTutorial[]) => {
+    //       this.tempTutorial = res;
+    //     },
+    //     err => {
+    //       this.error = err;
+    //     }
+    //   );
+    // }
     search() {
         this.searchService.searchInput = this.searchInput;
         console.log("***Search Button Clicked***");
         this.searchService.dummySearch();
         console.log("***************************");
+        this.searchResults.forEach(element => {
+            console.log("DatabaseResult: " + element);
+            console.log("DatabaseResult: " + element.toString());
+            console.log("DatabaseResult: " + element.lang_name.toString());
+        });
     }
     getTable() {
         this.searchService
@@ -1487,7 +1516,8 @@ let LexiconPageComponent = class LexiconPageComponent {
 };
 LexiconPageComponent.ctorParameters = () => [
     { type: _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_2__["BreakpointObserver"] },
-    { type: src_app_services_search_service_search_service__WEBPACK_IMPORTED_MODULE_3__["SearchService"] }
+    { type: src_app_services_search_service_search_service__WEBPACK_IMPORTED_MODULE_3__["SearchService"] },
+    { type: src_app_services_api_service_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] }
 ];
 LexiconPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1572,6 +1602,44 @@ PagesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/services/api-service/api.service.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/services/api-service/api.service.ts ***!
+  \*****************************************************/
+/*! exports provided: ApiService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiService", function() { return ApiService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+
+
+
+let ApiService = class ApiService {
+    constructor(http) {
+        this.http = http;
+        this.apiRoot = "ec2-52-26-88-246.us-west-2.compute.amazonaws.com"; //link to django instance (make it the link to the instance on aws)
+    }
+    getSearchResults() {
+        return this.http.get(this.apiRoot.concat("lexicon"));
+    }
+};
+ApiService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+ApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: "root"
+    })
+], ApiService);
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/search-service/search.service.ts":
 /*!***********************************************************!*\
   !*** ./src/app/services/search-service/search.service.ts ***!
@@ -1593,7 +1661,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SearchService = class SearchService {
+    // constructor(private http: HttpClient) {}
     constructor() {
+        // baseUrl =
+        //   "http://ec2-44-229-252-18.us-west-2.compute.amazonaws.com/SamplePage.php";
+        // tutorialResults: TempTutorial[];
         this.firstLangVal = src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["Language"].English; // Default English
         this.secondLangVal = src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["Language"].French; // Default French
         this.translateOn = true; // Default true
@@ -1601,38 +1673,6 @@ let SearchService = class SearchService {
         this.criteria = src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchCriteria"].BeginsWith; // Default BeginsWith
         this.target = src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLWord; // Default First Column Word
         this.input = ""; // Default empty string
-    }
-    // Setup for the future http.get call that will return an observable
-    // For now it is just returning mock data
-    getResults() {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(src_app_mock_language_database__WEBPACK_IMPORTED_MODULE_2__["ROWS"]);
-    }
-    dummySearch() {
-        // If translate on use the following search values in the backend call
-        if (this.translateOn) {
-            console.log("Search Text Input: " + this.input);
-            console.log("First Langauge Selected: " + this.firstLangVal);
-            console.log("Second Langauge Selected: " + this.secondLangVal);
-            console.log("Translate: " + this.translateOn);
-            console.log("ISO Standard Only: " + this.isoStandardOnlyOn);
-            console.log("Criteria Selected: " + this.criteria);
-            console.log("Target Selected: " + this.target);
-        }
-        else {
-            // If translate off then use the following search values in the backend call
-            console.log("Search Text Input: " + this.input);
-            console.log("First Langauge Selected: " + this.firstLangVal);
-            console.log("Translate: " + this.translateOn);
-            console.log("ISO Standard Only: " + this.isoStandardOnlyOn);
-            console.log("Criteria Selected: " + this.criteria);
-            if (this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].SLDefinition ||
-                this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].SLWord) {
-                console.log("Target Selected: " + src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLWord); // If the target is the second lang column, use the default value
-            }
-            else {
-                console.log("Target Selected: " + this.target);
-            }
-        }
     }
     // Maybe do this a different way
     get firstLang() {
@@ -1671,6 +1711,57 @@ let SearchService = class SearchService {
     set searchTarget(searchTarget) {
         this.target = searchTarget;
     }
+    get searchInput() {
+        return this.input;
+    }
+    set searchInput(searchInput) {
+        this.input = searchInput;
+    }
+    // getAll(): Observable<TempTutorial[]> {
+    //   return this.http.get("${this.baseUrl}/list").pipe(
+    //     map(res => {
+    //       this.tutorialResults = res["data"];
+    //       return this.tutorialResults;
+    //     }),
+    //     catchError(this.handleError)
+    //   );
+    // }
+    // private handleError(error: HttpErrorResponse) {
+    //   console.log(error);
+    //   return throwError("Error! something went wrong");
+    // }
+    // Setup for the future http.get call that will return an observable
+    // For now it is just returning mock data
+    getResults() {
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(src_app_mock_language_database__WEBPACK_IMPORTED_MODULE_2__["ROWS"]);
+    }
+    dummySearch() {
+        // If translate on use the following search values in the backend call
+        if (this.translateOn) {
+            console.log("Search Text Input: " + this.input);
+            console.log("First Langauge Selected: " + this.firstLangVal);
+            console.log("Second Langauge Selected: " + this.secondLangVal);
+            console.log("Translate: " + this.translateOn);
+            console.log("ISO Standard Only: " + this.isoStandardOnlyOn);
+            console.log("Criteria Selected: " + this.criteria);
+            console.log("Target Selected: " + this.target);
+        }
+        else {
+            // If translate off then use the following search values in the backend call
+            console.log("Search Text Input: " + this.input);
+            console.log("First Langauge Selected: " + this.firstLangVal);
+            console.log("Translate: " + this.translateOn);
+            console.log("ISO Standard Only: " + this.isoStandardOnlyOn);
+            console.log("Criteria Selected: " + this.criteria);
+            if (this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].SLDefinition ||
+                this.target === src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].SLWord) {
+                console.log("Target Selected: " + src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLWord); // If the target is the second lang column, use the default value
+            }
+            else {
+                console.log("Target Selected: " + this.target);
+            }
+        }
+    }
     // Remove second language options from drop down if translate is off
     getSearchTargetValues() {
         if (this.translate) {
@@ -1684,12 +1775,6 @@ let SearchService = class SearchService {
         else {
             return [src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLWord, src_app_models_enums__WEBPACK_IMPORTED_MODULE_4__["SearchTarget"].FLDefinition];
         }
-    }
-    get searchInput() {
-        return this.input;
-    }
-    set searchInput(searchInput) {
-        this.input = searchInput;
     }
 };
 SearchService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
