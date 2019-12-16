@@ -6,7 +6,6 @@ import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { MatInput } from "@angular/material/input";
 import { templateJitUrl } from "@angular/compiler";
 import { TempTutorial } from "src/app/models/tempTutorial";
-import { ApiService } from "src/app/services/api-service/api.service";
 
 @Component({
   selector: "app-lexicon-page",
@@ -20,8 +19,7 @@ export class LexiconPageComponent implements OnInit {
 
   constructor(
     public breakpointObserver: BreakpointObserver,
-    private searchService: SearchService,
-    private api: ApiService
+    private searchService: SearchService // private api: ApiService
   ) {}
   tabletSizeAndAbove = true;
   translateOn: boolean;
@@ -56,7 +54,7 @@ export class LexiconPageComponent implements OnInit {
   }
 
   getSearchResults(): void {
-    this.api.getSearchResults().subscribe(
+    this.searchService.getSearchResults().subscribe(
       (results: any[]) => (this.tempDatabaseResults = results),
       (error: any) => (this.error = error)
     );
@@ -78,10 +76,12 @@ export class LexiconPageComponent implements OnInit {
     console.log("***Search Button Clicked***");
     this.searchService.dummySearch();
     console.log("***************************");
-    this.tempDatabaseResults.forEach(element => {
-      console.log("DatabaseResult: " + element.lang_name.toString());
-      console.log("DatabaseResult: " + element.lang_code.toString());
-    });
+    // this.tempDatabaseResults.forEach(element => {
+    //   console.log("DatabaseResult: " + element.lang_name.toString());
+    //   console.log("DatabaseResult: " + element.lang_code.toString());
+    // });
+    // this.searchService.getSearchResults();
+    this.getSearchResults();
   }
 
   getTable(): void {
