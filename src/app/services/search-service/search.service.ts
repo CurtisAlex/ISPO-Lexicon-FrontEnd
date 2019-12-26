@@ -7,7 +7,7 @@ import {
 import { SearchResultRow } from "src/app/models/searchResultRow";
 import { ROWS } from "src/app/mock-language-database";
 import { of, Observable, throwError } from "rxjs";
-import { map, catchError } from "rxjs/operators";
+import { map, catchError, retry } from "rxjs/operators";
 import { Language, SearchCriteria, SearchTarget } from "src/app/models/enums";
 import { TempTutorial } from "src/app/models/tempTutorial";
 import { ThrowStmt } from "@angular/compiler";
@@ -179,28 +179,77 @@ export class SearchService {
     }
   }
 
-  getSearchResults() {
-    if (this.translateOn) {
-      // if translate is on then create params for the lexicon search
-      const params = new HttpParams()
+  getBothLangsResults(): Observable<any> {
+    const options = {
+      params: new HttpParams()
         .set("lang", this.convertFirstLanguageToInt().toString())
         .set("lang_two", this.convertSecondLanguageToInt().toString()) // Dont know what param this will be
         .set("iso_term", this.isoStandardOnlyOn.toString())
         .set("Critcriteriaeria", this.convertSearchCriteriaToInt().toString())
         .set("target", this.convertSearchTargetToInt().toString())
-        .set("sinput", this.input);
-      return this.http.get(this.apiRoot.concat("lexicon/"), { params });
-    } else {
-      // else translate is off, then create params for the directonary search
-      const params = new HttpParams()
+        .set("sinput", this.input)
+    };
+    return this.http
+      .get<SearchResultRow[]>(this.apiRoot, options)
+      .pipe(
+        retry(3),
+        catchError(
+          this.handleError<SearchResultRow[]>("getBothLangsResults", [])
+        )
+      );
+  }
+
+  getOneLangResults(): Observable<any> {
+    const options = {
+      params: new HttpParams()
         .set("lang", this.convertFirstLanguageToInt().toString())
         .set("iso_term", this.isoStandardOnlyOn.toString())
         .set("criteria", this.convertSearchCriteriaToInt().toString())
         .set("target", this.convertSearchTargetToInt().toString())
-        .set("sinput", this.input);
-      return this.http.get(this.apiRoot.concat("directonary/"), { params });
-    }
+        .set("sinput", this.input)
+    };
+    return this.http
+      .get<SearchResultRow[]>(this.apiRoot, options)
+      .pipe(
+        retry(3),
+        catchError(this.handleError<SearchResultRow[]>("getOneLangResults", []))
+      );
   }
+
+  private handleError<T>(operation = "operation", result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      this.log("${operation} failed: ${error.message}");
+      return of(result as T);
+    };
+  }
+
+  private log(message: string) {
+    console.log(message);
+  }
+
+  // getSearchResults() {
+  //   if (this.translateOn) {
+  //     // if translate is on then create params for the lexicon search
+  //     const params = new HttpParams()
+  //       .set("lang", this.convertFirstLanguageToInt().toString())
+  //       .set("lang_two", this.convertSecondLanguageToInt().toString()) // Dont know what param this will be
+  //       .set("iso_term", this.isoStandardOnlyOn.toString())
+  //       .set("Critcriteriaeria", this.convertSearchCriteriaToInt().toString())
+  //       .set("target", this.convertSearchTargetToInt().toString())
+  //       .set("sinput", this.input);
+  //     return this.http.get(this.apiRoot.concat("lexicon/"), { params });
+  //   } else {
+  //     // else translate is off, then create params for the directonary search
+  //     const params = new HttpParams()
+  //       .set("lang", this.convertFirstLanguageToInt().toString())
+  //       .set("iso_term", this.isoStandardOnlyOn.toString())
+  //       .set("criteria", this.convertSearchCriteriaToInt().toString())
+  //       .set("target", this.convertSearchTargetToInt().toString())
+  //       .set("sinput", this.input);
+  //     return this.http.get(this.apiRoot.concat("directonary/"), { params });
+  //   }
+  // }
 
   // Setup for the future http.get call that will return an observable
   // For now it is just returning mock data

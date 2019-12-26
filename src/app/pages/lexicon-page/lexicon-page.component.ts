@@ -54,10 +54,17 @@ export class LexiconPageComponent implements OnInit {
   }
 
   getSearchResults(): void {
-    this.searchService.getSearchResults().subscribe(
-      (results: any[]) => (this.tempDatabaseResults = results),
-      (error: any) => (this.error = error)
-    );
+    if (this.searchService.translate) {
+      this.searchService.getBothLangsResults().subscribe(
+        (results: any[]) => (this.tempDatabaseResults = results),
+        (error: any) => (this.error = error)
+      );
+    } else {
+      this.searchService.getOneLangResults().subscribe(
+        (results: any[]) => (this.tempDatabaseResults = results),
+        (error: any) => (this.error = error)
+      );
+    }
   }
 
   // getTempTutorial(): void {
