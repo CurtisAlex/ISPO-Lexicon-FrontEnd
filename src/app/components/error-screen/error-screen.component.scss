@@ -1,0 +1,25 @@
+.title-text {
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.description-text {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.error-result {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  border: 0.5px solid lightgray;
+  border-radius: 25px;
+}

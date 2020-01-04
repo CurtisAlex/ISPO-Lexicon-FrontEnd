@@ -3,9 +3,7 @@ import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { SearchResultRow } from "src/app/models/searchResultRow";
 import { SearchService } from "src/app/services/search-service/search.service";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
-import { MatInput } from "@angular/material/input";
-import { templateJitUrl } from "@angular/compiler";
-import { TempTutorial } from "src/app/models/tempTutorial";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-lexicon-page",
@@ -13,13 +11,9 @@ import { TempTutorial } from "src/app/models/tempTutorial";
   styleUrls: ["./lexicon-page.component.scss"]
 })
 export class LexiconPageComponent implements OnInit {
-  // tempTutorial: TempTutorial[];
-  // error = "";
-  // success = "";
-
   constructor(
     public breakpointObserver: BreakpointObserver,
-    private searchService: SearchService // private api: ApiService
+    private searchService: SearchService
   ) {}
   tabletSizeAndAbove = true;
   translateOn: boolean;
@@ -27,11 +21,12 @@ export class LexiconPageComponent implements OnInit {
 
   searchInput: string = "";
   searchResults: SearchResultRow[];
-  tempDatabaseResults: any[];
-  error: any;
+  error: boolean;
 
   advancedSearchClosedAnimationComplete = true;
   advancedSearchOn = false;
+
+  showSpinner: boolean;
 
   ngOnInit() {
     // Changes the view if the size is tablet and above
@@ -49,45 +44,43 @@ export class LexiconPageComponent implements OnInit {
       });
 
     this.getTable();
-    // this.getTempTutorial();
+
+    this.showSpinner = true;
+
     this.getSearchResults();
   }
 
   getSearchResults(): void {
     if (this.searchService.translate) {
       this.searchService.getBothLangsResults().subscribe(
-        (results: any[]) => (this.tempDatabaseResults = results),
-        (error: any) => (this.error = error)
+        (results: SearchResultRow[]) => {
+          this.searchResults = results;
+          this.showSpinner = false;
+        },
+        (error: boolean) => {
+          this.error = error;
+          this.showSpinner = false;
+        }
       );
     } else {
       this.searchService.getOneLangResults().subscribe(
-        (results: any[]) => (this.tempDatabaseResults = results),
-        (error: any) => (this.error = error)
+        (results: SearchResultRow[]) => {
+          this.searchResults = results;
+          this.showSpinner = false;
+        },
+        (error: boolean) => {
+          this.error = error;
+          this.showSpinner = false;
+        }
       );
     }
+    console.log("Error value: " + this.error);
+    console.log("Count: " + this.searchResults.length);
   }
-
-  // getTempTutorial(): void {
-  //   this.searchService.getAll().subscribe(
-  //     (res: TempTutorial[]) => {
-  //       this.tempTutorial = res;
-  //     },
-  //     err => {
-  //       this.error = err;
-  //     }
-  //   );
-  // }
 
   search(): void {
     this.searchService.searchInput = this.searchInput;
-    console.log("***Search Button Clicked***");
-    this.searchService.dummySearch();
-    console.log("***************************");
-    // this.tempDatabaseResults.forEach(element => {
-    //   console.log("DatabaseResult: " + element.lang_name.toString());
-    //   console.log("DatabaseResult: " + element.lang_code.toString());
-    // });
-    // this.searchService.getSearchResults();
+    this.showSpinner = true;
     this.getSearchResults();
   }
 
@@ -105,7 +98,7 @@ export class LexiconPageComponent implements OnInit {
   toggleIsoStandardOnly(matSlideToggleChange: MatSlideToggleChange) {
     this.isoStandardOnlyOn = matSlideToggleChange.checked.valueOf();
     this.searchService.isoStandardOnly = this.isoStandardOnlyOn;
-    this.searchService.dummySearch(); // Make new query call with the updated value of ISO Standard Only toggle
+    // Make new query call with the updated value of ISO Standard Only toggle
   }
 
   toggleAdvancedSearch() {

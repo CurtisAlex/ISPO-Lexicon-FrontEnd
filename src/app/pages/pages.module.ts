@@ -8,6 +8,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatCardModule } from "@angular/material/card";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 import { LexiconPageComponent } from "./lexicon-page/lexicon-page.component";
 import { AcknowledgementPageComponent } from "./acknowledgement-page/acknowledgement-page.component";
@@ -29,6 +30,7 @@ import { ComponentModule } from "../components/components.module";
     MatInputModule,
     MatIconModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
     MatCardModule,
     ComponentModule
   ],

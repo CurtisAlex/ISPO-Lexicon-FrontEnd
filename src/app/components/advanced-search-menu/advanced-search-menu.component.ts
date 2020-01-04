@@ -19,6 +19,7 @@ import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { SearchService } from "src/app/services/search-service/search.service";
 import { MatSelectChange } from "@angular/material/select";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
+import { SearchCriteria } from "src/app/models/enums";
 
 @Component({
   selector: "app-advanced-search-menu",
@@ -63,7 +64,12 @@ export class AdvancedSearchMenuComponent implements OnInit, DoCheck {
   criteriaControl = new FormControl("", [Validators.required]);
   targetControl = new FormControl("", [Validators.required]);
 
-  criteria: string[] = ["Begins with", "Ends with", "Contains", "Equals"];
+  // criteria: string[] = ["Begins with", "Ends with", "Contains", "Equals"];
+  criteria: string[] = [
+    SearchCriteria.StartsWith,
+    SearchCriteria.Contains,
+    SearchCriteria.Equals
+  ];
 
   targets: string[];
 
@@ -104,7 +110,7 @@ export class AdvancedSearchMenuComponent implements OnInit, DoCheck {
   toggleIsoStandardOnly(matSlideToggleChange: MatSlideToggleChange) {
     this.isoStandardOnlyOn = matSlideToggleChange.checked.valueOf();
     this.searchService.isoStandardOnly = this.isoStandardOnlyOn;
-    this.searchService.dummySearch(); // Make new query call with the updated value of ISO Standard Only toggle
+    // Make new query call with the updated value of ISO Standard Only toggle
   }
 
   // Set value of the criteria selected

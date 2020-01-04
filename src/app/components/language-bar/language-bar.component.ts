@@ -13,13 +13,13 @@ export class LanguageBarComponent implements OnInit, DoCheck {
 
   languages: Language[] = [
     Language.English,
-    Language.French,
-    Language.Spanish,
     Language.German,
     Language.Vietnamese,
+    Language.Spanish,
     Language.Chinese,
-    Language.Turkish,
-    Language.Japanse
+    Language.French,
+    Language.Japanse,
+    Language.Turkish
   ];
   activeLanguage = this.languages[0];
 
@@ -45,13 +45,21 @@ export class LanguageBarComponent implements OnInit, DoCheck {
     }
   }
 
+  selectedLanguageIndex(language) {
+    return language;
+  }
+
   firstLanguageClicked(language) {
     this.activeLanguage = language;
     this.searchService.firstLang = this.activeLanguage;
+    this.searchService.firstLangId =
+      this.languages.indexOf(this.activeLanguage) + 1;
   }
 
   translatedLanguageClicked(language) {
     this.activeTranslatedLanguage = language;
     this.searchService.secondLang = this.activeTranslatedLanguage;
+    this.searchService.secondLangId =
+      this.languages.indexOf(this.activeTranslatedLanguage) + 1;
   }
 }

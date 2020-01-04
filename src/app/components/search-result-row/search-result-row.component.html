@@ -8,17 +8,17 @@
     <app-search-result-cell
       class="cell"
       [class.first-col]="translateOn"
-      [word]="row.knownLangWord"
-      [description]="row.knownLangDescription"
-      [isoStandard]="row.isoStandard"
+      [word]="row.word"
+      [description]="row.description"
+      [isoStandard]="isIsoTerm()"
     ></app-search-result-cell>
-    <app-search-result-cell
+    <!-- <app-search-result-cell
       *ngIf="translateOn"
       class="cell"
       [word]="row.unknownLangWord"
       [description]="row.unknownLangDescription"
       [isoStandard]="row.isoStandard"
-    ></app-search-result-cell>
+    ></app-search-result-cell> -->
   </div>
 </div>
 <ng-template #mobileViewPage>
@@ -33,10 +33,10 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title class="panel-title-text">
-          {{ row.knownLangWord }}
+          {{ row.word }}
         </mat-panel-title>
         <img
-          *ngIf="row.isoStandard"
+          *ngIf="isIsoTerm"
           src="https://cdn.iso.org/resources/wood/3.0.8/img/iso/iso-logo-print.gif"
           alt="ISO Standard"
           class="iso-standard-icon"
@@ -45,18 +45,21 @@
           *ngIf="!panelOpenState && translateOn"
           class="panel-title-text-second-language"
         >
-          {{ row.unknownLangWord }}
+          <!-- second language -->
+          {{ row.word }}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      {{ row.knownLangDescription }}
+      {{ row.description }}
       <p
         *ngIf="panelOpenState && translateOn"
         class="panel-second-language-word"
       >
-        {{ row.unknownLangWord }}
+        <!-- second language -->
+        {{ row.word }}
       </p>
       <p *ngIf="panelOpenState && translateOn">
-        {{ row.unknownLangDescription }}
+        <!-- second language description -->
+        {{ row.description }}
       </p>
     </mat-expansion-panel>
   </mat-accordion>

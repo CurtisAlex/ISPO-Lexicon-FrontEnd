@@ -28,9 +28,7 @@
         >Translate</mat-slide-toggle
       >
     </div>
-    <!-- <div *ngIf="advancedSearchOn"> -->
 
-    <!-- </div> -->
     <div
       [class.search-buttons]="advancedSearchClosedAnimationComplete"
       [class.advancedSearchSettings]="advancedSearchOpen()"
@@ -55,19 +53,32 @@
         Search
       </button>
     </div>
-    <!-- </div> -->
   </div>
 
   <div class="language-selectors">
     <app-language-bar></app-language-bar>
   </div>
 
-  <div class="search-results">
+  <div
+    class="search-results"
+    *ngIf="searchResults.length >= 1 && !showSpinner; else errorScreen"
+  >
     <app-search-result-row
       *ngFor="let row of searchResults; index as i"
       [row]="row"
       [searchResultNumber]="i"
       [totalResultsNumber]="searchResults.length"
     ></app-search-result-row>
+  </div>
+
+  <ng-template #errorScreen>
+    <app-error-screen
+      [noSearchResults]="searchResults.length === 0"
+      [waitToLoad]="showSpinner"
+    >
+    </app-error-screen>
+  </ng-template>
+  <div class="spinner" *ngIf="showSpinner">
+    <mat-spinner></mat-spinner>
   </div>
 </div>

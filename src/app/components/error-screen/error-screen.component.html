@@ -1,0 +1,18 @@
+<div class="error-result" *ngIf="noSearchResults && !waitToLoad">
+  <div class="title">
+    <p class="title-text">
+      Your search did not match any records
+    </p>
+  </div>
+</div>
+
+<div *ngIf="!noSearchResults && !waitToLoad" class="error-result">
+  <div class="title">
+    <p class="title-text">
+      Connection Error
+    </p>
+  </div>
+  <p class="description-text">
+    Please contact the system administrator
+  </p>
+</div>

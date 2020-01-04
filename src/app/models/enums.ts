@@ -1,27 +1,27 @@
 export enum Language {
   English = "English",
-  French = "French",
-  Spanish = "Spanish",
   German = "German",
   Vietnamese = "Vietnamese",
+  Spanish = "Spanish",
   Chinese = "Chinese",
-  Turkish = "Turkish",
-  Japanse = "Japanse"
+  French = "French",
+  Japanse = "Japanse",
+  Turkish = "Turkish"
 }
 
 export enum LanguageShort {
   English = "en",
-  French = "fr",
-  Spanish = "es",
   German = "de",
   Vietnamese = "vi",
+  Spanish = "es",
   Chinese = "zh",
-  Turkish = "tr",
-  Japanse = "ja"
+  French = "fr",
+  Japanse = "ja",
+  Turkish = "tr"
 }
 
 export enum SearchCriteria {
-  BeginsWith = "Begins With",
+  StartsWith = "Starts With",
   EndsWith = "Ends With",
   Contains = "Contains",
   Equals = "Equals"
@@ -30,6 +30,7 @@ export enum SearchCriteria {
 export enum SearchTarget {
   FLWord = "First Language Word",
   FLDefinition = "First Language Definition",
+  BothFLWordDef = "Both First Language Word and Definition",
   SLWord = "Second Language Word",
   SLDefinition = "Second Language Definition"
 }

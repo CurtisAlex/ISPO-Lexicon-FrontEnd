@@ -14,6 +14,7 @@ import { SearchResultRowComponent } from "./search-result-row/search-result-row.
 import { SearchResultCellComponent } from "./search-result-cell/search-result-cell.component";
 import { AdvancedSearchMenuComponent } from "./advanced-search-menu/advanced-search-menu.component";
 import { FooterComponent } from "./footer/footer.component";
+import { ErrorScreenComponent } from "./error-screen/error-screen.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FooterComponent } from "./footer/footer.component";
     SearchResultRowComponent,
     SearchResultCellComponent,
     AdvancedSearchMenuComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorScreenComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { FooterComponent } from "./footer/footer.component";
     SearchResultRowComponent,
     SearchResultCellComponent,
     AdvancedSearchMenuComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorScreenComponent
   ]
 })
 export class ComponentModule {}

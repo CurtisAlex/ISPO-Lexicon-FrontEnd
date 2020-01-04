@@ -78,6 +78,17 @@
   border-radius: 25px;
 }
 
+.spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 0.5rem;
+  border: 0.5px solid lightgray;
+  border-radius: 25px;
+}
+
 .language-selectors {
   display: flex;
   margin: 0.5rem;

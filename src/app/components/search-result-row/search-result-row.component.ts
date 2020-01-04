@@ -64,4 +64,12 @@ export class SearchResultRowComponent implements OnInit, DoCheck {
   getTranslateValue() {
     this.translateOn = this.searchService.translate;
   }
+
+  isIsoTerm() {
+    if (this.row.termStd !== undefined && this.row.termStd === "ISO") {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
