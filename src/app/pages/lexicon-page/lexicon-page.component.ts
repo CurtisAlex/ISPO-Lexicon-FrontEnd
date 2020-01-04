@@ -21,12 +21,15 @@ export class LexiconPageComponent implements OnInit {
 
   searchInput: string = "";
   searchResults: SearchResultRow[];
+  searchResultsTwo: SearchResultRow[];
+  completeSearchResults: SearchResultRow[];
   error: boolean;
 
   advancedSearchClosedAnimationComplete = true;
   advancedSearchOn = false;
 
-  showSpinner: boolean;
+  showSpinner;
+  secondColSpinner: boolean;
 
   ngOnInit() {
     // Changes the view if the size is tablet and above
@@ -46,9 +49,24 @@ export class LexiconPageComponent implements OnInit {
     this.getTable();
 
     this.showSpinner = true;
+    if (this.translateOn) {
+      this.secondColSpinner = true;
+    }
 
-    this.getSearchResults();
+    //this.getSearchResults();
+    this.search();
   }
+
+  getTranslate() {
+    return this.searchService.translate;
+  }
+
+  // getWordIdsFromFirstCol() {
+  //   let lengthOfSearchResult: number = this.searchResults.length;
+  //   let wordIds: number[lengthOfSearchResult];
+
+  //   this.searchResults.forEach(function(value) {});
+  // }
 
   getSearchResults(): void {
     if (this.searchService.translate) {
@@ -60,6 +78,17 @@ export class LexiconPageComponent implements OnInit {
         (error: boolean) => {
           this.error = error;
           this.showSpinner = false;
+        }
+      );
+      // Second Language
+      this.searchService.getBothLangsResultsTwo().subscribe(
+        (results: SearchResultRow[]) => {
+          this.searchResultsTwo = results;
+          this.secondColSpinner = false;
+        },
+        (error: boolean) => {
+          this.error = error;
+          this.secondColSpinner = false;
         }
       );
     } else {
@@ -81,7 +110,15 @@ export class LexiconPageComponent implements OnInit {
   search(): void {
     this.searchService.searchInput = this.searchInput;
     this.showSpinner = true;
+    if (this.translateOn) {
+      this.secondColSpinner = true;
+    }
     this.getSearchResults();
+    if (this.translateOn) {
+      console.log(this.prepareSearchResults());
+      this.searchResults = this.prepareSearchResults();
+      console.log(this.searchResults);
+    }
   }
 
   getTable(): void {
@@ -118,5 +155,58 @@ export class LexiconPageComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  displaySpinner() {
+    if (this.translateOn) {
+      return this.showSpinner || this.secondColSpinner;
+    } else {
+      return this.showSpinner;
+    }
+  }
+
+  prepareSearchResults() {
+    // this.searchResults.forEach(function(value) {
+    //   console.log("Word: " + value.word + " Term Id: " + value.termID);
+    // });
+    // this.searchResultsTwo.forEach(function(value) {
+    //   console.log("Word: " + value.word + " Term Id: " + value.termID);
+    // });
+
+    let result = this.searchResults.map(a => {
+      let obj2 = this.searchResultsTwo.find(b => a.termID === b.termID);
+      if (obj2) {
+        const newSearchResultsTwo: SearchResultRow = {
+          termID: obj2.termID,
+          word: a.word,
+          description: a.description,
+          pinyin: a.pinyin,
+          translatedLangWord: obj2.word,
+          translatedLangDescription: obj2.description
+        };
+        // newSearchResultsTwo.translatedLangWord = obj2.word;
+        // newSearchResultsTwo.translatedLangDescription = obj2.description;
+        Object.assign(a, newSearchResultsTwo);
+      }
+      return a;
+    });
+
+    console.log(result);
+
+    // var arrayResult: SearchResultRow[this.searchResults.length];
+
+    // result.forEach(function(value) {
+    //   const updatedSearchResult: SearchResultRow = {
+    //     termID: value.termID,
+    //     word: value.word,
+    //     description: value.description,
+    //     pinyin: value.pinyin,
+    //     translatedLangWord: value.word,
+    //     translatedLangDescription: value.description
+    //   };
+    //   arrayResult.push(updatedSearchResult);
+    // });
+
+    return result;
   }
 }

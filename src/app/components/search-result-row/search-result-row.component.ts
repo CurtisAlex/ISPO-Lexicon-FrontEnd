@@ -55,6 +55,8 @@ export class SearchResultRowComponent implements OnInit, DoCheck {
       });
 
     this.getTranslateValue();
+
+    console.log(this.row);
   }
 
   ngDoCheck() {
@@ -70,6 +72,22 @@ export class SearchResultRowComponent implements OnInit, DoCheck {
       return true;
     } else {
       return false;
+    }
+  }
+
+  secondLangWordPresent() {
+    if (this.row.translatedLangWord === undefined) {
+      return "N/A";
+    } else {
+      return this.row.translatedLangWord;
+    }
+  }
+
+  secondLangDescriptionPresent() {
+    if (this.row.translatedLangDescription === undefined) {
+      return "N/A";
+    } else {
+      return this.row.translatedLangDescription;
     }
   }
 }

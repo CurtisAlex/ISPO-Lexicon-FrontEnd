@@ -7,7 +7,7 @@ import {
 import { SearchResultRow } from "src/app/models/searchResultRow";
 import { ROWS } from "src/app/mock-language-database";
 import { of, Observable, throwError } from "rxjs";
-import { map, catchError, retry } from "rxjs/operators";
+import { map, catchError, retry, delay } from "rxjs/operators";
 import { Language, SearchCriteria, SearchTarget } from "src/app/models/enums";
 @Injectable({
   providedIn: "root"
@@ -125,11 +125,35 @@ export class SearchService {
     } else if (this.target === SearchTarget.BothFLWordDef) {
       return "";
     } else if (this.target === SearchTarget.SLWord) {
+      // Most likely remove this feature and only allow searching of first column
       return ""; // add in later
     } else if (this.target === SearchTarget.SLDefinition) {
       return ""; // add in later
     }
   }
+
+  // TEMP ******
+  getBothLangsResultsTwo(): Observable<any> {
+    // let firstLangWordIds = [1, 2, 3];
+
+    // const options = {
+    //   params: new HttpParams()
+    //     .set("lang", this.secondLangId.toString())
+    //     .set("wordIds", JSON.stringify(firstLangWordIds))
+    const options = {
+      params: new HttpParams().set("lang", this.secondLangId.toString())
+    };
+    return this.http
+      .get<SearchResultRow[]>(this.apiRoot.concat("dictionary/"), options)
+      .pipe(
+        retry(3),
+        catchError(
+          this.handleError<SearchResultRow[]>("getBothLangsResultsTwo", [])
+        ),
+        delay(2000)
+      );
+  }
+  // ***********
 
   getBothLangsResults(): Observable<any> {
     // const options = {
@@ -150,7 +174,7 @@ export class SearchService {
         .set("target", this.convertSearchTargetForDB())
     };
     return this.http
-      .get<SearchResultRow[]>(this.apiRoot.concat("lexicon/"), options)
+      .get<SearchResultRow[]>(this.apiRoot.concat("dictionary/"), options)
       .pipe(
         retry(3),
         catchError(

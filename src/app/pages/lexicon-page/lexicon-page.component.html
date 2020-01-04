@@ -61,24 +61,35 @@
 
   <div
     class="search-results"
-    *ngIf="searchResults.length >= 1 && !showSpinner; else errorScreen"
+    *ngIf="searchResults.length >= 1 && !displaySpinner(); else errorScreen"
   >
+    <!-- <div *ngIf="getTranslate(); else returnSearchResults">
+      <app-search-result-row
+        *ngFor="let row of completeSearchResults; index as i"
+        [row]="row"
+        [searchResultNumber]="i"
+        [totalResultsNumber]="completeSearchResults.length"
+      ></app-search-result-row>
+    </div> -->
+    <!-- 
+    <ng-template #returnSearchResults> -->
     <app-search-result-row
       *ngFor="let row of searchResults; index as i"
       [row]="row"
       [searchResultNumber]="i"
       [totalResultsNumber]="searchResults.length"
     ></app-search-result-row>
+    <!-- </ng-template> -->
   </div>
 
   <ng-template #errorScreen>
     <app-error-screen
       [noSearchResults]="searchResults.length === 0"
-      [waitToLoad]="showSpinner"
+      [waitToLoad]="displaySpinner()"
     >
     </app-error-screen>
   </ng-template>
-  <div class="spinner" *ngIf="showSpinner">
+  <div class="spinner" *ngIf="displaySpinner()">
     <mat-spinner></mat-spinner>
   </div>
 </div>

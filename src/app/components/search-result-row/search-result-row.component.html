@@ -12,13 +12,13 @@
       [description]="row.description"
       [isoStandard]="isIsoTerm()"
     ></app-search-result-cell>
-    <!-- <app-search-result-cell
+    <app-search-result-cell
       *ngIf="translateOn"
       class="cell"
-      [word]="row.unknownLangWord"
-      [description]="row.unknownLangDescription"
-      [isoStandard]="row.isoStandard"
-    ></app-search-result-cell> -->
+      [word]="secondLangWordPresent()"
+      [description]="secondLangDescriptionPresent()"
+      [isoStandard]="isIsoTerm()"
+    ></app-search-result-cell>
   </div>
 </div>
 <ng-template #mobileViewPage>
@@ -46,7 +46,7 @@
           class="panel-title-text-second-language"
         >
           <!-- second language -->
-          {{ row.word }}
+          {{ secondLangWordPresent() }}
         </mat-panel-title>
       </mat-expansion-panel-header>
       {{ row.description }}
@@ -55,11 +55,11 @@
         class="panel-second-language-word"
       >
         <!-- second language -->
-        {{ row.word }}
+        {{ secondLangWordPresent() }}
       </p>
       <p *ngIf="panelOpenState && translateOn">
         <!-- second language description -->
-        {{ row.description }}
+        {{ secondLangDescriptionPresent() }}
       </p>
     </mat-expansion-panel>
   </mat-accordion>
