@@ -124,22 +124,17 @@ export class SearchService {
       return "description_only";
     } else if (this.target === SearchTarget.BothFLWordDef) {
       return "";
-    } else if (this.target === SearchTarget.SLWord) {
-      // Most likely remove this feature and only allow searching of first column
-      return ""; // add in later
-    } else if (this.target === SearchTarget.SLDefinition) {
-      return ""; // add in later
     }
+    // } else if (this.target === SearchTarget.SLWord) {
+    //   // Most likely remove this feature and only allow searching of first column
+    //   return ""; // add in later
+    // } else if (this.target === SearchTarget.SLDefinition) {
+    //   return ""; // add in later
+    // }
   }
 
   // TEMP ******
   getBothLangsResultsTwo(): Observable<any> {
-    // let firstLangWordIds = [1, 2, 3];
-
-    // const options = {
-    //   params: new HttpParams()
-    //     .set("lang", this.secondLangId.toString())
-    //     .set("wordIds", JSON.stringify(firstLangWordIds))
     const options = {
       params: new HttpParams().set("lang", this.secondLangId.toString())
     };
@@ -156,15 +151,6 @@ export class SearchService {
   // ***********
 
   getBothLangsResults(): Observable<any> {
-    // const options = {
-    //   params: new HttpParams()
-    //     .set("lang", this.firstLangId.toString())
-    //     .set("lang_two", this.secondLangIdVal.toString()) // Dont know what param this will be
-    //     .set("iso_term", this.isoStandardOnlyOn.toString())
-    //     .set("Critcriteriaeria", this.convertSearchCriteriaToInt().toString())
-    //     .set("target", this.convertSearchTargetToInt().toString())
-    //     .set("sinput", this.input)
-    // };
     const options = {
       params: new HttpParams()
         .set("search", this.input)
@@ -184,14 +170,6 @@ export class SearchService {
   }
 
   getOneLangResults(): Observable<any> {
-    // const options = {
-    //   params: new HttpParams()
-    //     .set("lang", this.convertFirstLanguageToInt().toString())
-    //     .set("iso_term", this.isoStandardOnlyOn.toString())
-    //     .set("criteria", this.convertSearchCriteriaToInt().toString())
-    //     .set("target", this.convertSearchTargetToInt().toString())
-    //     .set("sinput", this.input)
-    // };
     const options = {
       params: new HttpParams()
         .set("search", this.input)
@@ -229,20 +207,20 @@ export class SearchService {
 
   // Remove second language options from drop down if translate is off
   getSearchTargetValues() {
-    if (this.translate) {
-      return [
-        SearchTarget.FLWord,
-        SearchTarget.FLDefinition,
-        SearchTarget.BothFLWordDef,
-        SearchTarget.SLWord,
-        SearchTarget.SLDefinition
-      ];
-    } else {
-      return [
-        SearchTarget.FLWord,
-        SearchTarget.FLDefinition,
-        SearchTarget.BothFLWordDef
-      ];
-    }
+    // if (this.translate) {
+    //   return [
+    //     SearchTarget.FLWord,
+    //     SearchTarget.FLDefinition,
+    //     SearchTarget.BothFLWordDef,
+    //     SearchTarget.SLWord,
+    //     SearchTarget.SLDefinition
+    //   ];
+    // } else {
+    return [
+      SearchTarget.FLWord,
+      SearchTarget.FLDefinition,
+      SearchTarget.BothFLWordDef
+    ];
+    // }
   }
 }

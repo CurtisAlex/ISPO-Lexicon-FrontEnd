@@ -61,7 +61,10 @@
 
   <div
     class="search-results"
-    *ngIf="searchResults.length >= 1 && !displaySpinner(); else errorScreen"
+    *ngIf="
+      completeSearchResults.length >= 1 && !displaySpinner();
+      else errorScreen
+    "
   >
     <!-- <div *ngIf="getTranslate(); else returnSearchResults">
       <app-search-result-row
@@ -74,17 +77,17 @@
     <!-- 
     <ng-template #returnSearchResults> -->
     <app-search-result-row
-      *ngFor="let row of searchResults; index as i"
+      *ngFor="let row of completeSearchResults; index as i"
       [row]="row"
       [searchResultNumber]="i"
-      [totalResultsNumber]="searchResults.length"
+      [totalResultsNumber]="completeSearchResults.length"
     ></app-search-result-row>
     <!-- </ng-template> -->
   </div>
 
   <ng-template #errorScreen>
     <app-error-screen
-      [noSearchResults]="searchResults.length === 0"
+      [noSearchResults]="completeSearchResults.length === 0"
       [waitToLoad]="displaySpinner()"
     >
     </app-error-screen>

@@ -68,9 +68,9 @@ export class LexiconPageComponent implements OnInit {
   //   this.searchResults.forEach(function(value) {});
   // }
 
-  getSearchResults(): void {
+  async getSearchResults() {
     if (this.searchService.translate) {
-      this.searchService.getBothLangsResults().subscribe(
+      await this.searchService.getBothLangsResults().subscribe(
         (results: SearchResultRow[]) => {
           this.searchResults = results;
           this.showSpinner = false;
@@ -81,7 +81,7 @@ export class LexiconPageComponent implements OnInit {
         }
       );
       // Second Language
-      this.searchService.getBothLangsResultsTwo().subscribe(
+      await this.searchService.getBothLangsResultsTwo().subscribe(
         (results: SearchResultRow[]) => {
           this.searchResultsTwo = results;
           this.secondColSpinner = false;
@@ -91,8 +91,9 @@ export class LexiconPageComponent implements OnInit {
           this.secondColSpinner = false;
         }
       );
+      return true;
     } else {
-      this.searchService.getOneLangResults().subscribe(
+      await this.searchService.getOneLangResults().subscribe(
         (results: SearchResultRow[]) => {
           this.searchResults = results;
           this.showSpinner = false;
@@ -102,22 +103,23 @@ export class LexiconPageComponent implements OnInit {
           this.showSpinner = false;
         }
       );
+      return true;
     }
-    console.log("Error value: " + this.error);
-    console.log("Count: " + this.searchResults.length);
   }
 
-  search(): void {
+  async search() {
     this.searchService.searchInput = this.searchInput;
     this.showSpinner = true;
     if (this.translateOn) {
       this.secondColSpinner = true;
     }
-    this.getSearchResults();
+    await this.getSearchResults();
     if (this.translateOn) {
       console.log(this.prepareSearchResults());
-      this.searchResults = this.prepareSearchResults();
-      console.log(this.searchResults);
+      this.completeSearchResults = this.prepareSearchResults();
+      console.log(this.completeSearchResults);
+    } else {
+      this.completeSearchResults = this.searchResults;
     }
   }
 
