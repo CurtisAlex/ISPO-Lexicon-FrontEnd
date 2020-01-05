@@ -116,7 +116,7 @@ export class LexiconPageComponent implements OnInit {
     this.searchService.searchInput = this.searchInput;
     this.showSpinner = true;
     this.getSearchResults();
-    if (this.translateOn) {
+    if (this.searchService.translate) {
       console.log("translate On");
       this.lexiconOn = true;
     } else {
