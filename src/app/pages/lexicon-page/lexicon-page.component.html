@@ -61,33 +61,30 @@
 
   <div
     class="search-results"
-    *ngIf="
-      completeSearchResults.length >= 1 && !displaySpinner();
-      else errorScreen
-    "
+    *ngIf="responseListLength >= 1 && !displaySpinner(); else errorScreen"
   >
-    <!-- <div *ngIf="getTranslate(); else returnSearchResults">
-      <app-search-result-row
-        *ngFor="let row of completeSearchResults; index as i"
+    <div *ngIf="lexiconOn; else returnSearchResults">
+      <app-lexicon-search-result-row
+        *ngFor="let row of lexiconSearchResults; index as i"
         [row]="row"
         [searchResultNumber]="i"
-        [totalResultsNumber]="completeSearchResults.length"
+        [totalResultsNumber]="lexiconSearchResults.length"
+      ></app-lexicon-search-result-row>
+    </div>
+
+    <ng-template #returnSearchResults>
+      <app-search-result-row
+        *ngFor="let row of searchResults; index as i"
+        [row]="row"
+        [searchResultNumber]="i"
+        [totalResultsNumber]="searchResults.length"
       ></app-search-result-row>
-    </div> -->
-    <!-- 
-    <ng-template #returnSearchResults> -->
-    <app-search-result-row
-      *ngFor="let row of completeSearchResults; index as i"
-      [row]="row"
-      [searchResultNumber]="i"
-      [totalResultsNumber]="completeSearchResults.length"
-    ></app-search-result-row>
-    <!-- </ng-template> -->
+    </ng-template>
   </div>
 
   <ng-template #errorScreen>
     <app-error-screen
-      [noSearchResults]="completeSearchResults.length === 0"
+      [noSearchResults]="responseListLength === 0"
       [waitToLoad]="displaySpinner()"
     >
     </app-error-screen>

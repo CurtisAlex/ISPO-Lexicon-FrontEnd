@@ -10,6 +10,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 
 import { LanguageBarComponent } from "./language-bar/language-bar.component";
+import { LexiconSearchResultRowComponent } from "./lexicon-search-result-row/lexicon-search-result-row.component";
 import { SearchResultRowComponent } from "./search-result-row/search-result-row.component";
 import { SearchResultCellComponent } from "./search-result-cell/search-result-cell.component";
 import { AdvancedSearchMenuComponent } from "./advanced-search-menu/advanced-search-menu.component";
@@ -19,6 +20,7 @@ import { ErrorScreenComponent } from "./error-screen/error-screen.component";
 @NgModule({
   declarations: [
     LanguageBarComponent,
+    LexiconSearchResultRowComponent,
     SearchResultRowComponent,
     SearchResultCellComponent,
     AdvancedSearchMenuComponent,
@@ -39,6 +41,7 @@ import { ErrorScreenComponent } from "./error-screen/error-screen.component";
   bootstrap: [],
   exports: [
     LanguageBarComponent,
+    LexiconSearchResultRowComponent,
     SearchResultRowComponent,
     SearchResultCellComponent,
     AdvancedSearchMenuComponent,

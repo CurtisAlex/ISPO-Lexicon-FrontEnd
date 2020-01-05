@@ -9,6 +9,7 @@ import { ROWS } from "src/app/mock-language-database";
 import { of, Observable, throwError } from "rxjs";
 import { map, catchError, retry, delay } from "rxjs/operators";
 import { Language, SearchCriteria, SearchTarget } from "src/app/models/enums";
+import { LexiconSearchResultRow } from "src/app/models/lexiconSearchResultRow";
 @Injectable({
   providedIn: "root"
 })
@@ -134,20 +135,20 @@ export class SearchService {
   }
 
   // TEMP ******
-  getBothLangsResultsTwo(): Observable<any> {
-    const options = {
-      params: new HttpParams().set("lang", this.secondLangId.toString())
-    };
-    return this.http
-      .get<SearchResultRow[]>(this.apiRoot.concat("dictionary/"), options)
-      .pipe(
-        retry(3),
-        catchError(
-          this.handleError<SearchResultRow[]>("getBothLangsResultsTwo", [])
-        ),
-        delay(2000)
-      );
-  }
+  // getBothLangsResultsTwo(): Observable<any> {
+  //   const options = {
+  //     params: new HttpParams().set("lang", this.secondLangId.toString())
+  //   };
+  //   return this.http
+  //     .get<SearchResultRow[]>(this.apiRoot.concat("dictionary/"), options)
+  //     .pipe(
+  //       retry(3),
+  //       catchError(
+  //         this.handleError<SearchResultRow[]>("getBothLangsResultsTwo", [])
+  //       ),
+  //       delay(2000)
+  //     );
+  // }
   // ***********
 
   getBothLangsResults(): Observable<any> {
@@ -156,15 +157,16 @@ export class SearchService {
         .set("search", this.input)
         .set("ispo", this.isoStandardOnlyOn.toString())
         .set("lang", this.firstLangId.toString())
+        .set("trans_lang", this.secondLangId.toString())
         .set("criteria", this.convertSearchCriteriaForDB())
         .set("target", this.convertSearchTargetForDB())
     };
     return this.http
-      .get<SearchResultRow[]>(this.apiRoot.concat("dictionary/"), options)
+      .get<LexiconSearchResultRow[]>(this.apiRoot.concat("lexicon/"), options)
       .pipe(
         retry(3),
         catchError(
-          this.handleError<SearchResultRow[]>("getBothLangsResults", [])
+          this.handleError<LexiconSearchResultRow[]>("getBothLangsResults", [])
         )
       );
   }

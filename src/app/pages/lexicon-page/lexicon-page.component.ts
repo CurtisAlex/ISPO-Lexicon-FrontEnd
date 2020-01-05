@@ -4,6 +4,7 @@ import { SearchResultRow } from "src/app/models/searchResultRow";
 import { SearchService } from "src/app/services/search-service/search.service";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { HttpErrorResponse } from "@angular/common/http";
+import { LexiconSearchResultRow } from "src/app/models/lexiconSearchResultRow";
 
 @Component({
   selector: "app-lexicon-page",
@@ -20,16 +21,23 @@ export class LexiconPageComponent implements OnInit {
   isoStandardOnlyOn: boolean;
 
   searchInput: string = "";
+
+  lexiconOn: boolean;
+
   searchResults: SearchResultRow[];
-  searchResultsTwo: SearchResultRow[];
-  completeSearchResults: SearchResultRow[];
+  // searchResultsTwo: SearchResultRow[];
+  // completeSearchResults: SearchResultRow[];
+
+  lexiconSearchResults: LexiconSearchResultRow[];
+
+  responseListLength: number;
+
   error: boolean;
 
   advancedSearchClosedAnimationComplete = true;
   advancedSearchOn = false;
 
-  showSpinner;
-  secondColSpinner: boolean;
+  showSpinner: boolean;
 
   ngOnInit() {
     // Changes the view if the size is tablet and above
@@ -49,9 +57,6 @@ export class LexiconPageComponent implements OnInit {
     this.getTable();
 
     this.showSpinner = true;
-    if (this.translateOn) {
-      this.secondColSpinner = true;
-    }
 
     //this.getSearchResults();
     this.search();
@@ -68,12 +73,23 @@ export class LexiconPageComponent implements OnInit {
   //   this.searchResults.forEach(function(value) {});
   // }
 
-  async getSearchResults() {
+  getSearchResults() {
     if (this.searchService.translate) {
-      await this.searchService.getBothLangsResults().subscribe(
-        (results: SearchResultRow[]) => {
-          this.searchResults = results;
+      this.searchService.getBothLangsResults().subscribe(
+        (results: LexiconSearchResultRow[]) => {
+          console.log(results);
+          // const result = results.map(data => )
+          // console.log(results.);
+          // console.log(results.)
+          this.lexiconSearchResults = results;
+          this.responseListLength = this.lexiconSearchResults.length;
           this.showSpinner = false;
+          console.log(this.lexiconSearchResults.length);
+
+          console.log(this.lexiconSearchResults[0].term_id);
+          console.log(this.lexiconSearchResults[0].words);
+          console.log(this.lexiconSearchResults[0].words[0].word);
+          console.log(this.getTranslate());
         },
         (error: boolean) => {
           this.error = error;
@@ -81,22 +97,23 @@ export class LexiconPageComponent implements OnInit {
         }
       );
       // Second Language
-      await this.searchService.getBothLangsResultsTwo().subscribe(
-        (results: SearchResultRow[]) => {
-          this.searchResultsTwo = results;
-          this.secondColSpinner = false;
-        },
-        (error: boolean) => {
-          this.error = error;
-          this.secondColSpinner = false;
-        }
-      );
-      return true;
+      // this.searchService.getBothLangsResultsTwo().subscribe(
+      //   (results: SearchResultRow[]) => {
+      //     this.searchResultsTwo = results;
+      //     this.secondColSpinner = false;
+      //   },
+      //   (error: boolean) => {
+      //     this.error = error;
+      //     this.secondColSpinner = false;
+      //   }
+      // );
+      // return true;
     } else {
-      await this.searchService.getOneLangResults().subscribe(
+      this.searchService.getOneLangResults().subscribe(
         (results: SearchResultRow[]) => {
           this.searchResults = results;
           this.showSpinner = false;
+          this.responseListLength = this.searchResults.length;
         },
         (error: boolean) => {
           this.error = error;
@@ -107,19 +124,20 @@ export class LexiconPageComponent implements OnInit {
     }
   }
 
-  async search() {
+  search() {
     this.searchService.searchInput = this.searchInput;
     this.showSpinner = true;
+    this.getSearchResults();
     if (this.translateOn) {
-      this.secondColSpinner = true;
-    }
-    await this.getSearchResults();
-    if (this.translateOn) {
-      console.log(this.prepareSearchResults());
-      this.completeSearchResults = this.prepareSearchResults();
-      console.log(this.completeSearchResults);
+      // console.log(this.prepareSearchResults());
+      // this.completeSearchResults = this.prepareSearchResults();
+      // console.log(this.completeSearchResults);
+      console.log("translate On");
+      this.lexiconOn = true;
     } else {
-      this.completeSearchResults = this.searchResults;
+      console.log("translate off");
+      this.lexiconOn = false;
+      // this.completeSearchResults = this.searchResults;
     }
   }
 
@@ -160,55 +178,63 @@ export class LexiconPageComponent implements OnInit {
   }
 
   displaySpinner() {
-    if (this.translateOn) {
-      return this.showSpinner || this.secondColSpinner;
-    } else {
-      return this.showSpinner;
-    }
+    // if (this.translateOn) {
+    // return this.showSpinner || this.secondColSpinner;
+    // } else {
+    return this.showSpinner;
+    // }
   }
 
-  prepareSearchResults() {
-    // this.searchResults.forEach(function(value) {
-    //   console.log("Word: " + value.word + " Term Id: " + value.termID);
-    // });
-    // this.searchResultsTwo.forEach(function(value) {
-    //   console.log("Word: " + value.word + " Term Id: " + value.termID);
-    // });
+  // showErrorScreen() {
+  //   if (this.searchResults !== undefined && this.searchResults.length !== 0) {
+  //     if (this.lexiconSearchResults !== undefined && this.lexiconSearchResults.length !== 0) {
 
-    let result = this.searchResults.map(a => {
-      let obj2 = this.searchResultsTwo.find(b => a.termID === b.termID);
-      if (obj2) {
-        const newSearchResultsTwo: SearchResultRow = {
-          termID: obj2.termID,
-          word: a.word,
-          description: a.description,
-          pinyin: a.pinyin,
-          translatedLangWord: obj2.word,
-          translatedLangDescription: obj2.description
-        };
-        // newSearchResultsTwo.translatedLangWord = obj2.word;
-        // newSearchResultsTwo.translatedLangDescription = obj2.description;
-        Object.assign(a, newSearchResultsTwo);
-      }
-      return a;
-    });
+  //     }
+  //   }
+  // }
 
-    console.log(result);
+  // prepareSearchResults() {
+  //   // this.searchResults.forEach(function(value) {
+  //   //   console.log("Word: " + value.word + " Term Id: " + value.termID);
+  //   // });
+  //   // this.searchResultsTwo.forEach(function(value) {
+  //   //   console.log("Word: " + value.word + " Term Id: " + value.termID);
+  //   // });
 
-    // var arrayResult: SearchResultRow[this.searchResults.length];
+  //   let result = this.searchResults.map(a => {
+  //     let obj2 = this.searchResultsTwo.find(b => a.termID === b.termID);
+  //     if (obj2) {
+  //       const newSearchResultsTwo: SearchResultRow = {
+  //         termID: obj2.termID,
+  //         word: a.word,
+  //         description: a.description,
+  //         pinyin: a.pinyin,
+  //         translatedLangWord: obj2.word,
+  //         translatedLangDescription: obj2.description
+  //       };
+  //       // newSearchResultsTwo.translatedLangWord = obj2.word;
+  //       // newSearchResultsTwo.translatedLangDescription = obj2.description;
+  //       Object.assign(a, newSearchResultsTwo);
+  //     }
+  //     return a;
+  //   });
 
-    // result.forEach(function(value) {
-    //   const updatedSearchResult: SearchResultRow = {
-    //     termID: value.termID,
-    //     word: value.word,
-    //     description: value.description,
-    //     pinyin: value.pinyin,
-    //     translatedLangWord: value.word,
-    //     translatedLangDescription: value.description
-    //   };
-    //   arrayResult.push(updatedSearchResult);
-    // });
+  // console.log(result);
 
-    return result;
-  }
+  // var arrayResult: SearchResultRow[this.searchResults.length];
+
+  // result.forEach(function(value) {
+  //   const updatedSearchResult: SearchResultRow = {
+  //     termID: value.termID,
+  //     word: value.word,
+  //     description: value.description,
+  //     pinyin: value.pinyin,
+  //     translatedLangWord: value.word,
+  //     translatedLangDescription: value.description
+  //   };
+  //   arrayResult.push(updatedSearchResult);
+  // });
+
+  //   return result;
+  // }
 }

@@ -1,0 +1,66 @@
+<div *ngIf="tabletSizeAndAbove; else mobileViewPage">
+  <div
+    class="search-row"
+    [class.background]="oddResult"
+    [class.rounded-top]="firstResult"
+    [class.rounded-bottom]="lastResult"
+  >
+    <app-search-result-cell
+      class="cell"
+      [class.first-col]="translateOn"
+      [word]="row.words[0].word"
+      [description]="row.words[0].description"
+      [isoStandard]="isIsoTerm()"
+    ></app-search-result-cell>
+    <app-search-result-cell
+      *ngIf="translateOn"
+      class="cell"
+      [word]="secondLangWordPresent()"
+      [description]="secondLangDescriptionPresent()"
+      [isoStandard]="isIsoTerm()"
+    ></app-search-result-cell>
+  </div>
+</div>
+<ng-template #mobileViewPage>
+  <mat-accordion>
+    <mat-expansion-panel
+      [class.background]="oddResult"
+      [class.rounded-top]="firstResult"
+      [class.rounded-bottom]="lastResult"
+      [class.expansion-row]="!firstResult && !lastResult"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="panel-title-text">
+          {{ row.word }}
+        </mat-panel-title>
+        <img
+          *ngIf="isIsoTerm()"
+          src="https://cdn.iso.org/resources/wood/3.0.8/img/iso/iso-logo-print.gif"
+          alt="ISO Standard"
+          class="iso-standard-icon"
+        />
+        <mat-panel-title
+          *ngIf="!panelOpenState && translateOn"
+          class="panel-title-text-second-language"
+        >
+          <!-- second language -->
+          {{ secondLangWordPresent() }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      {{ row.description }}
+      <p
+        *ngIf="panelOpenState && translateOn"
+        class="panel-second-language-word"
+      >
+        <!-- second language -->
+        {{ secondLangWordPresent() }}
+      </p>
+      <p *ngIf="panelOpenState && translateOn">
+        <!-- second language description -->
+        {{ secondLangDescriptionPresent() }}
+      </p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-template>
