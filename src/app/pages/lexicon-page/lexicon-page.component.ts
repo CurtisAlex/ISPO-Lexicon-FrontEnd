@@ -96,18 +96,6 @@ export class LexiconPageComponent implements OnInit {
           this.showSpinner = false;
         }
       );
-      // Second Language
-      // this.searchService.getBothLangsResultsTwo().subscribe(
-      //   (results: SearchResultRow[]) => {
-      //     this.searchResultsTwo = results;
-      //     this.secondColSpinner = false;
-      //   },
-      //   (error: boolean) => {
-      //     this.error = error;
-      //     this.secondColSpinner = false;
-      //   }
-      // );
-      // return true;
     } else {
       this.searchService.getOneLangResults().subscribe(
         (results: SearchResultRow[]) => {
@@ -129,9 +117,6 @@ export class LexiconPageComponent implements OnInit {
     this.showSpinner = true;
     this.getSearchResults();
     if (this.translateOn) {
-      // console.log(this.prepareSearchResults());
-      // this.completeSearchResults = this.prepareSearchResults();
-      // console.log(this.completeSearchResults);
       console.log("translate On");
       this.lexiconOn = true;
     } else {
